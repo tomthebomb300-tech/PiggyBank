@@ -12,4 +12,6 @@ class Controller:
 
     def getInvestmentDeposits(self):
         return self.finances.getInvestmentDeposits()
-    
+
+    def getRecentTransactions(self):
+        return self.finances.getRecentTransactions(20)

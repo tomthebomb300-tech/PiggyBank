@@ -24,6 +24,12 @@ class Finances:
         deposited = self.df[self.df["Category"] == "Investing"]
         return (deposited["Amount"].sum())*-1/100
 
+    def getRecentTransactions(self, num):
+        print(self.df["Category"].unique())
+        last = self.df.tail(num)
+        last["Amount"] /= 100
+        return last.to_dict("index")
+
 
 
 
