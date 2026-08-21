@@ -1,6 +1,8 @@
 import customtkinter as ctk
 
 from PIL import Image
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from controller import Controller
 
 controller = Controller()
@@ -24,13 +26,11 @@ def create_card(parent, title, value, subtitle):
     subtitle_label = ctk.CTkLabel(card,text=subtitle,font=("Arial", 16),text_color="#aaaaaa")
     subtitle_label.pack(anchor="w",padx=20,pady=(10,20))
 
-    return value_label, subtitle_label
-
 
 def create_left_side(parent):
-    balance_value, balance_subtitle = create_card(parent,"Account","€{0}".format(controller.getBankBalance()),"")
-    salary_value, salary_subtitle = create_card(parent,"Cash","€{0}".format(controller.getCashBalance()),"")
-    savings_value, savings_subtitle = create_card(parent,"Investments","€Access trading212 API","Deposited: €{0}".format(controller.getInvestmentDeposits()))
+    create_card(parent,"Account","€{0}".format(controller.getBankBalance()),"")
+    create_card(parent,"Cash","€{0}".format(controller.getCashBalance()),"")
+    create_card(parent,"Investments","€Access trading212 API","Deposited: €{0}".format(controller.getInvestmentDeposits()))
 
 
 def getImagePath(transaction):
@@ -73,7 +73,7 @@ def getImagePath(transaction):
 
 def create_recent_transactions(parent, transactions):
     recent_transactions_card = ctk.CTkFrame(parent, fg_color="#1d2228", corner_radius=5)
-    recent_transactions_card.pack(side = "left", expand = True, fill = "both", padx = 10, pady = 10)
+    recent_transactions_card.pack(side = "top", expand = True, fill = "both", padx = 10, pady = 10)
 
     label = ctk.CTkLabel(recent_transactions_card, text = "Recent Transactions", font = ("Arial", 20), text_color = "white")
     label.pack(anchor = "w", pady = (20,10), padx = 20)
@@ -119,9 +119,40 @@ def create_recent_transactions(parent, transactions):
         amount = ctk.CTkLabel(right_frame, text = entry, font = ("Arial", 16, "bold"), text_color = txt_colour)
         amount.pack(anchor = "w")
 
+def create_month_overview(parent, expenses):
+    for c in expenses:
+        expenses[c] *= -1
+
+    chart_frame = ctk.CTkFrame(parent, corner_radius=15)
+    chart_frame.pack(side = "top", padx = 20, pady = 20, fill = "both", expand = True)
+
+    labels = list(expenses.keys())
+    values = list(expenses.values())
+    colors = ["#B8E64C", "#11C5C6", "#8CB4FF", "#9B84F3", "#D6AA19", "#C71B71"]
+
+    fig = Figure(figsize = (6, 6), dpi = 100)
+    ax = fig.add_subplot(111)
+
+    wedges, texts, autotexts = ax.pie(values, colors=colors,startangle=90,wedgeprops=dict(width=0.35, edgecolor="#1d2228"),autopct="%1.0f%%",pctdistance=0.82)
+
+    
+    total = round(sum(values),2)
+    ax.text(0, 0.05, f"- €{total:,}", ha="center", va="center",fontsize=18, fontweight="bold", color="white")
+    ax.text(0, -0.12, "Expenses this month", ha="center",fontsize=10, color="lightgray")
+
+    fig.patch.set_facecolor("#1d2228")
+
+    for t in texts + autotexts:
+        t.set_color("white")
+
+    
+    canvas = FigureCanvasTkAgg(fig, master=chart_frame)
+    canvas.draw()
+    canvas.get_tk_widget().pack(fill="both", expand=True)
 
 def create_right_side(parent):
     create_recent_transactions(parent, controller.getRecentTransactions())
+    create_month_overview(parent, controller.getBiggestExpenses(4, 2026))
 
 
 def create_dashboard(parent):

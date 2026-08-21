@@ -25,10 +25,33 @@ class Finances:
         return (deposited["Amount"].sum())*-1/100
 
     def getRecentTransactions(self, num):
-        print(self.df["Category"].unique())
         last = self.df.tail(num)
         last["Amount"] /= 100
         return last.to_dict("index")
+
+    def getBiggestExpenses(self, month, year):
+        month = self.df[(self.df["Date"].dt.year == year) & (self.df["Date"].dt.month == month)]
+        categorys = self.df["Category"].unique()
+        dict = {}
+        for c in categorys:
+            expense = month[(month["Category"] == c) & (month["Amount"] < 0)]["Amount"].sum()
+            if(expense < 0):
+                dict[c] = expense/100
+
+        #Hold 5 largest expenses and compact all others into one category        
+        other = 0
+        while(len(dict) > 5):
+            smallestExpense = -1000
+            smallestCategory = None
+            for key in dict:
+                if(dict[key] > smallestExpense):
+                    smallestExpense = dict[key]
+                    smallestCategory = key
+            other += smallestExpense
+            del dict[smallestCategory]
+        dict["Other"] = round(other, 2)
+        
+        return dict
 
 
 

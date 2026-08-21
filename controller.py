@@ -15,3 +15,6 @@ class Controller:
 
     def getRecentTransactions(self):
         return self.finances.getRecentTransactions(20)
+
+    def getBiggestExpenses(self, month, year):
+        return self.finances.getBiggestExpenses(month, year)
