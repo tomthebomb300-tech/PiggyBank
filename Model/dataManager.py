@@ -62,14 +62,14 @@ def getGoogleSheet():
     return BytesIO(r.content)
 
 def getCSV():
-    return "allData.csv"
+    return "D:\Coding\Python\PiggyBank\Data\data.csv"
 
 def getDataframe():
     df = pd.read_csv(getCSV())
     df = df[["Date", "Amount", "Payment Method", "Shop/Person", "Location", "Description", "Category"]]
     df["Date"] = pd.to_datetime(df["Date"], format="%d-%b-%Y")
     df = df.sort_values("Date")
-    return df;
+    return df
 
 def getFinances():
     return Finances(4423.71, 120.00, getDataframe())
