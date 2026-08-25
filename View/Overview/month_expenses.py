@@ -2,41 +2,96 @@ import customtkinter as ctk
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from datetime import datetime
 
 class Month_expenses:
     def __init__(self, parent, controller):
-        self.parent = parent
         self.controller = controller
-        self.create_pie_legend(parent)
+        self.date = datetime(2025, 8, 1)
 
-    def create_pie_legend(self, parent):
-        expenses = self.controller.getBiggestExpenses(8, 2025)
+        self.create_frame(parent)
+        
 
+    def create_frame(self, parent):
+        frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
+        frame.pack(side = "bottom", padx = 10, pady = 10)
+        self.create_header(frame)
+        # self.create_pie_legend(frame)
+        self.create_chart(frame)
+
+
+    def update_month(self):
+        month_label.configure(text = self.date.strftime("%B %Y"))
+
+
+    def last_month(self):
+        if self.date.month == 1:
+            self.date = self.date.replace(year=self.date.year - 1, month=12)
+        else:
+            self.date = self.date.replace(month=self.date.month - 1)
+        self.update_month()
+        self.update_chart()
+
+
+    def next_month(self):
+        if self.date.month == 12:
+            self.date = self.date.replace(year=self.date.year + 1, month=1)
+        else:
+            self.date = self.date.replace(month=self.date.month + 1)
+        self.update_month()
+        self.update_chart()
+
+
+    def create_header(self, parent):
+        header_frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
+        header_frame.pack(side = "top", padx = 10, pady = (30, 10), fill = "both", expand = True)
+
+        last_button = ctk.CTkButton(header_frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.last_month)
+        last_button.pack(side = "left", padx = 40)
+
+        global month_label
+        month_label = ctk.CTkLabel(header_frame, text = self.date.strftime("%B %Y"), font = ("Arial", 16))
+        month_label.pack(side = "left", expand = True)
+
+        next_button = ctk.CTkButton(header_frame, text = ">", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.next_month)
+        next_button.pack(side = "right", padx = 40)
+
+
+    def create_chart(self, parent):
+        self.fig = Figure(figsize=(6, 6), dpi=100)
+        self.ax = self.fig.add_subplot(111)
+
+        self.canvas = FigureCanvasTkAgg(self.fig, master=parent)
+        self.canvas.get_tk_widget().pack(fill="both", expand=True)
+        self.update_chart()
+
+
+    def update_chart(self):
+        expenses = self.controller.getBiggestExpenses(self.date.month, self.date.year)
+        
         for c in expenses:
             expenses[c] *= -1
 
-        chart_frame = ctk.CTkFrame(parent)
-        chart_frame.pack(side = "top", padx = 10, pady = 10, fill = "both", expand = True)
+        self.ax.clear()   # Remove the old chart
 
         labels = list(expenses.keys())
         values = list(expenses.values())
+
         colors = ["#B8E64C", "#11C5C6", "#8CB4FF", "#9B84F3", "#D6AA19", "#C71B71"]
 
-        fig = Figure(figsize = (6, 6), dpi = 100)
-        ax = fig.add_subplot(111)
-
-        wedges, texts, autotexts = ax.pie(
-            values, 
-            colors = colors, 
-            startangle = 90,
-            wedgeprops = dict(width=0.35, edgecolor="#1d2228"), 
-            autopct = "%1.0f%%", 
-            pctdistance = 0.82
+        wedges, _, autotexts = self.ax.pie(
+            values,
+            colors=colors[:len(values)],
+            startangle=90,
+            wedgeprops=dict(width=0.35, edgecolor="#1d2228"),
+            autopct="%1.0f%%",
+            pctdistance=0.82
         )
 
-        fig.subplots_adjust(bottom = 0.25)
+        total = round(sum(values),2)
+        self.ax.text(0, 0, f"- €{total:,}", ha="center", va="center", fontsize=18, fontweight="bold", color="white")
 
-        ax.legend(
+        self.ax.legend(
             wedges, 
             [f"{label}\n- €{value:,}" for label, value in zip(labels, values)], 
             loc = "upper center", 
@@ -50,16 +105,12 @@ class Month_expenses:
             columnspacing = 4
         ) 
 
-        
-        total = round(sum(values),2)
-        ax.text(0, 0, "- €{0}".format(total), ha = "center", va = "center", fontsize = 18, fontweight = "bold", color = "white")
+        self.fig.patch.set_facecolor("#1d2228")
+        self.ax.set_facecolor("#1d2228")
 
-        fig.patch.set_facecolor("#1d2228")
+        for text in autotexts:
+            text.set_color("white")
 
-        for t in texts + autotexts:
-            t.set_color("white")
+        self.fig.subplots_adjust(bottom=0.25)
 
-        
-        canvas = FigureCanvasTkAgg(fig, master = chart_frame)
-        canvas.draw()
-        canvas.get_tk_widget().pack(fill = "both", expand = True)
+        self.canvas.draw()      # Refresh the window
