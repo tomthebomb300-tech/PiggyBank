@@ -16,12 +16,11 @@ class Month_expenses:
         frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
         frame.pack(side = "bottom", padx = 10, pady = 10)
         self.create_header(frame)
-        # self.create_pie_legend(frame)
         self.create_chart(frame)
 
 
     def update_month(self):
-        month_label.configure(text = self.date.strftime("%B %Y"))
+        self.month_label.configure(text = self.date.strftime("%B %Y"))
 
 
     def last_month(self):
@@ -49,9 +48,8 @@ class Month_expenses:
         last_button = ctk.CTkButton(header_frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.last_month)
         last_button.pack(side = "left", padx = 40)
 
-        global month_label
-        month_label = ctk.CTkLabel(header_frame, text = self.date.strftime("%B %Y"), font = ("Arial", 16))
-        month_label.pack(side = "left", expand = True)
+        self.month_label = ctk.CTkLabel(header_frame, text = self.date.strftime("%B %Y"), font = ("Arial", 16))
+        self.month_label.pack(side = "left", expand = True)
 
         next_button = ctk.CTkButton(header_frame, text = ">", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.next_month)
         next_button.pack(side = "right", padx = 40)

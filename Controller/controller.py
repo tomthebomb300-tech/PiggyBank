@@ -56,3 +56,15 @@ class Controller:
             return image.format("Transport")
 
         return "Images/Light/Null.png"
+
+    def getMonths(self, year):
+        return self.finances.getMonths(year)
+
+    def getMonthlyAccountBalance(self, year):
+        return self.finances.getMonthlyAccountBalance(year)
+
+    def getMonthlyCashBalance(self, year):
+        return self.finances.getMonthlyCashBalance(year)
+
+    def getMonthlyInvestedBalance(self, year):
+        return self.finances.getMonthlyInvestedBalance(year)
