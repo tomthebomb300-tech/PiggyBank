@@ -13,21 +13,39 @@ class Balances_chart:
 
 
     def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent)
+        frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
         frame.pack(side = "bottom", fill = "both", expand = True, padx = 10, pady = 10)
+        self.create_header(frame)
         self.create_chart(frame)
 
+    def create_header(self, parent):
+        frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
+        frame.pack(anchor = "e", pady = (30, 10), padx = (0, 10))
+
+        last_button = ctk.CTkButton(frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.last_year)
+        last_button.pack(side = "left")
+
+        self.year_label = ctk.CTkLabel(frame, text = self.date.strftime("%Y"), font = ("Arial", 16))
+        self.year_label.pack(side = "left")
+
+        next_button = ctk.CTkButton(frame, text = ">", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.next_year)
+        next_button.pack(side = "right")
+
     def last_year(self):
-        pass
+        self.date = self.date.replace(year=self.date.year - 1)
+        self.update_year()
+        self.update_chart()
 
     def next_year(self):
-        pass
+        self.date = self.date.replace(year=self.date.year + 1)
+        self.update_year()
+        self.update_chart()
 
     def update_year(self):
-        pass
+        self.year_label.configure(text = self.date.strftime("%Y"))
 
     def create_chart(self, parent):
-        self.fig = Figure(figsize = (6, 3), dpi = 100)
+        self.fig = Figure(figsize = (6, 3), dpi = 100, layout="tight")
         self.ax = self.fig.add_subplot(111)
 
         self.fig.patch.set_facecolor("#1d2228")
@@ -48,21 +66,16 @@ class Balances_chart:
         self.ax.set_facecolor("#1d2228")
 
         self.ax.plot(months, account,
-                     linewidth=3,
+                     linewidth=1,
                      label="Account Balance")
 
         self.ax.plot(months, cash,
-                     linewidth=3,
+                     linewidth=1,
                      label="Cash Balance")
 
         self.ax.plot(months, invested,
-                     linewidth=3,
+                     linewidth=1,
                      label="Deposited Investments")
-
-        self.ax.set_title("Account Balance Overview",
-                          color="white",
-                          fontsize=14,
-                          loc="left")
 
         self.ax.tick_params(colors="white")
         self.ax.spines["bottom"].set_color("#555")
