@@ -1,8 +1,11 @@
 import customtkinter as ctk
+import numpy as np
+import mplcursors
 
 from datetime import datetime
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from scipy.interpolate import PchipInterpolator
 
 class Balances_chart:
     def __init__(self, parent, controller):
@@ -62,24 +65,37 @@ class Balances_chart:
         cash = self.controller.getMonthlyCashBalance(self.date.year)
         invested = self.controller.getMonthlyInvestedBalance(self.date.year)
 
+        x = np.arange(len(months))
+        x_smooth = np.linspace(x.min(), x.max(), 300)
+
+        account_smooth = PchipInterpolator(x, account)(x_smooth)
+        cash_smooth = PchipInterpolator(x, cash)(x_smooth)
+        invested_smooth = PchipInterpolator(x, invested)(x_smooth)
+
+
+
         self.ax.clear()
         self.ax.set_facecolor("#1d2228")
 
-        self.ax.plot(months, account,
-                     linewidth=1,
-                     label="Account Balance")
+        account_line = self.ax.plot(x_smooth, account_smooth,"#349404",linewidth=2,label="Account Balance",)[0]
+        self.ax.plot(months, account,"#349404",linewidth=0,marker = "o")
 
-        self.ax.plot(months, cash,
-                     linewidth=1,
-                     label="Cash Balance")
+        cash_line = self.ax.plot(x_smooth, cash_smooth,"#e3ff00",linewidth=2,label="Cash Balance")[0]
+        self.ax.plot(months, cash,"#e3ff00",linewidth=0,marker = "o")
+        
+        invested_line = self.ax.plot(x_smooth, invested_smooth,"#bd00ff",linewidth=2,label="Deposited Investments")[0]
+        self.ax.plot(months, invested,"#bd00ff",linewidth=0,marker = "o")
 
-        self.ax.plot(months, invested,
-                     linewidth=1,
-                     label="Deposited Investments")
 
-        self.ax.tick_params(colors="white")
-        self.ax.spines["bottom"].set_color("#555")
-        self.ax.spines["left"].set_color("#555")
+        # cursor = mplcursors.cursor([account_line, cash_line, invested_line], hover = True)
+
+        self.ax.set_xticks(x)
+        self.ax.set_xticklabels(months)
+        self.ax.tick_params(axis = "x", colors = "white")
+        self.ax.tick_params(axis = "y", colors = "white")
+
+        self.ax.spines["bottom"].set_color("white")
+        self.ax.spines["left"].set_color("white")
         self.ax.spines["top"].set_visible(False)
         self.ax.spines["right"].set_visible(False)
 
