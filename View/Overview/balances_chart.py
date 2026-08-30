@@ -56,41 +56,42 @@ class Balances_chart:
 
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
         self.canvas.get_tk_widget().pack(fill = "both", expand = True)
+
         self.update_chart()
 
 
     def update_chart(self):
-        months = self.controller.getMonths(self.date.year)
-        account = self.controller.getMonthlyAccountBalance(self.date.year)
-        cash = self.controller.getMonthlyCashBalance(self.date.year)
-        invested = self.controller.getMonthlyInvestedBalance(self.date.year)
+        self.months = self.controller.getMonths(self.date.year)
+        self.account = self.controller.getMonthlyAccountBalance(self.date.year)
+        self.cash = self.controller.getMonthlyCashBalance(self.date.year)
+        self.invested = self.controller.getMonthlyInvestedBalance(self.date.year)
 
-        x = np.arange(len(months))
-        x_smooth = np.linspace(x.min(), x.max(), 300)
+        self.x = np.arange(len(self.months))
+        x_smooth = np.linspace(self.x.min(), self.x.max(), 300)
 
-        account_smooth = PchipInterpolator(x, account)(x_smooth)
-        cash_smooth = PchipInterpolator(x, cash)(x_smooth)
-        invested_smooth = PchipInterpolator(x, invested)(x_smooth)
+        account_smooth = PchipInterpolator(self.x, self.account)(x_smooth)
+        cash_smooth = PchipInterpolator(self.x, self.cash)(x_smooth)
+        invested_smooth = PchipInterpolator(self.x, self.invested)(x_smooth)
 
 
 
         self.ax.clear()
+
+        self.add_tooltip()
+
         self.ax.set_facecolor("#1d2228")
 
-        account_line = self.ax.plot(x_smooth, account_smooth,"#349404",linewidth=2,label="Account Balance",)[0]
-        self.ax.plot(months, account,"#349404",linewidth=0,marker = "o")
+        self.ax.plot(x_smooth, account_smooth,"#349404",linewidth=2,label="Account Balance",)
+        self.ax.plot(self.months, self.account,"#349404",linewidth=0,marker = "o")
 
-        cash_line = self.ax.plot(x_smooth, cash_smooth,"#e3ff00",linewidth=2,label="Cash Balance")[0]
-        self.ax.plot(months, cash,"#e3ff00",linewidth=0,marker = "o")
+        self.ax.plot(x_smooth, cash_smooth,"#e3ff00",linewidth=2,label="Cash Balance")
+        self.ax.plot(self.months, self.cash,"#e3ff00",linewidth=0,marker = "o")
         
-        invested_line = self.ax.plot(x_smooth, invested_smooth,"#bd00ff",linewidth=2,label="Deposited Investments")[0]
-        self.ax.plot(months, invested,"#bd00ff",linewidth=0,marker = "o")
+        self.ax.plot(x_smooth, invested_smooth,"#bd00ff",linewidth=2,label="Deposited Investments")
+        self.ax.plot(self.months, self.invested,"#bd00ff",linewidth=0,marker = "o")
 
-
-        # cursor = mplcursors.cursor([account_line, cash_line, invested_line], hover = True)
-
-        self.ax.set_xticks(x)
-        self.ax.set_xticklabels(months)
+        self.ax.set_xticks(self.x)
+        self.ax.set_xticklabels(self.months)
         self.ax.tick_params(axis = "x", colors = "white")
         self.ax.tick_params(axis = "y", colors = "white")
 
@@ -110,3 +111,51 @@ class Balances_chart:
             text.set_color("white")
 
         self.canvas.draw()
+
+
+    def add_tooltip(self):
+        self.vline = self.ax.axvline(x = 0, color = "#666666", linestyle = "--", alpha = 0.5)
+        self.vline.set_visible(False)
+
+        self.tooltip = self.ax.text(0.85, 0.95, "", transform = self.ax.transAxes ,ha = "left", va ="top",fontsize=10,
+                bbox=dict(  boxstyle="round,pad=0.5",
+                            facecolor="#2b2b2b",
+                            edgecolor="white",
+                            alpha=0.9
+                        ),
+            color="white"
+        )
+        self.tooltip.set_visible(False)
+        self.canvas.mpl_connect("motion_notify_event",self.on_hover)
+
+
+    def on_hover(self, event):
+        if(event.inaxes != self.ax or event.xdata is None):
+            self.hide_toolbar()
+            return
+
+        month_index = int(round(event.xdata))
+        if(month_index >= len(self.months) or month_index < 0):
+            self.hide_toolbar()
+            return
+
+        point_x = self.x[month_index]
+
+        self.vline.set_xdata([point_x, point_x])
+        self.vline.set_visible(True)
+
+        self.tooltip.set_text("{0}\nAccount: €{1}\nCash:       €{2}\nInvested: €{3}".format(
+                                                                                    self.months[month_index], 
+                                                                                    self.account[month_index], 
+                                                                                    self.cash[month_index], 
+                                                                                    self.invested[month_index]
+                                                                                    ))
+
+        self.tooltip.set_visible(True)
+        self.canvas.draw_idle()
+
+
+    def hide_toolbar(self):
+        self.vline.set_visible(False)
+        self.tooltip.set_visible(False)
+        self.canvas.draw_idle()
