@@ -10,7 +10,7 @@ from scipy.interpolate import PchipInterpolator
 class Balances_chart:
     def __init__(self, parent, controller):
         self.controller = controller
-        self.date = datetime(2025, 1, 1)
+        self.date = datetime(2026, 1, 1)
 
         self.create_frame(parent)
 
@@ -23,29 +23,45 @@ class Balances_chart:
 
     def create_header(self, parent):
         frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
-        frame.pack(anchor = "e", pady = (30, 10), padx = (0, 10))
+        frame.pack(pady = (30, 10), padx = (0, 10))
 
-        last_button = ctk.CTkButton(frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.last_year)
-        last_button.pack(side = "left")
+        last_button = ctk.CTkButton(frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.previous_year)
+        last_button.pack(side = "left", padx = (0, 20))
 
-        self.year_label = ctk.CTkLabel(frame, text = self.date.strftime("%Y"), font = ("Arial", 16))
+        self.year_label = ctk.CTkLabel(frame, font = ("Arial", 20))
         self.year_label.pack(side = "left")
+        self.update_year()
 
         next_button = ctk.CTkButton(frame, text = ">", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.next_year)
-        next_button.pack(side = "right")
+        next_button.pack(side = "right", padx = (20, 0))
 
-    def last_year(self):
+    def __get_chart_data(self, year):
+        self.months = self.controller.getMonths(year)
+        self.account = self.controller.getMonthlyAccountBalance(year)
+        self.cash = self.controller.getMonthlyCashBalance(year)
+        self.invested = self.controller.getMonthlyInvestedBalance(year)
+    
+
+    def previous_year(self):
+        self.__get_chart_data(self.date.year-1)
+        if(len(self.months) <= 0):
+            return
+
         self.date = self.date.replace(year=self.date.year - 1)
         self.update_year()
         self.update_chart()
 
     def next_year(self):
-        self.date = self.date.replace(year=self.date.year + 1)
+        self.__get_chart_data(self.date.year+1)
+        if(len(self.months) <= 0):
+            return
+
+        self.date = self.date.replace(year=self.date.year+1)
         self.update_year()
         self.update_chart()
 
     def update_year(self):
-        self.year_label.configure(text = self.date.strftime("%Y"))
+        self.year_label.configure(text = "{0} {1}".format(self.date.strftime("%Y"), "Balances"))
 
     def create_chart(self, parent):
         self.fig = Figure(figsize = (6, 3), dpi = 100, layout="tight")
@@ -57,15 +73,11 @@ class Balances_chart:
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
         self.canvas.get_tk_widget().pack(fill = "both", expand = True)
 
+        self.__get_chart_data(self.date.year)
         self.update_chart()
 
 
     def update_chart(self):
-        self.months = self.controller.getMonths(self.date.year)
-        self.account = self.controller.getMonthlyAccountBalance(self.date.year)
-        self.cash = self.controller.getMonthlyCashBalance(self.date.year)
-        self.invested = self.controller.getMonthlyInvestedBalance(self.date.year)
-
         self.x = np.arange(len(self.months))
         x_smooth = np.linspace(self.x.min(), self.x.max(), 300)
 

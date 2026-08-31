@@ -12,7 +12,7 @@ class Summary_cards:
         frame.pack(fill = "x")
         self.create_card(frame,"Account","€{0}".format(self.controller.getBankBalance()),"")
         self.create_card(frame,"Cash","€{0}".format(self.controller.getCashBalance()),"")
-        self.create_card(frame,"Investments","€{0}".format(self.controller.getPortfolioValue()),"Deposited: €{0}".format(self.controller.getInvestmentDeposits()))
+        self.create_card(frame,"Investments Value","€{0}".format(self.controller.getPortfolioValue()),"Deposited: €{0}".format(self.controller.getInvestmentDeposits()))
 
     def create_card(self, parent, title, value, subtitle):
         card = ctk.CTkFrame(parent,fg_color="#1d2228")

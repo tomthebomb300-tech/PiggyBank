@@ -39,6 +39,9 @@ class Finances:
             if(expense < 0):
                 dict[c] = expense/100
 
+        if(len(dict) <= 5):
+            return dict
+
         #Hold 5 largest expenses and compact all others into one category        
         other = 0
         while(len(dict) > 5):

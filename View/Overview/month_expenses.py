@@ -18,25 +18,42 @@ class Month_expenses:
         self.create_header(frame)
         self.create_chart(frame)
 
+    def __get_expenses(self, month, year):
+        self.expenses = self.controller.getBiggestExpenses(month, year)
 
     def update_month(self):
-        self.month_label.configure(text = self.date.strftime("%B %Y"))
+        self.month_label.configure(text = "{0} {1}".format(self.date.strftime("%B %Y"), "Expenses"))
 
 
     def last_month(self):
-        if self.date.month == 1:
-            self.date = self.date.replace(year=self.date.year - 1, month=12)
+        updated_date = self.date
+        if updated_date.month == 1:
+            updated_date = updated_date.replace(year=updated_date.year - 1, month=12)
         else:
-            self.date = self.date.replace(month=self.date.month - 1)
+            updated_date = updated_date.replace(month=updated_date.month - 1)
+
+        self.__get_expenses(updated_date.month, updated_date.year)
+        if(len(self.expenses) <= 0):
+            return
+
+        self.date = updated_date
         self.update_month()
         self.update_chart()
 
 
     def next_month(self):
-        if self.date.month == 12:
-            self.date = self.date.replace(year=self.date.year + 1, month=1)
+        updated_date = self.date
+        if updated_date.month == 12:
+            updated_date = updated_date.replace(year=updated_date.year + 1, month=1)
+
         else:
-            self.date = self.date.replace(month=self.date.month + 1)
+            updated_date = updated_date.replace(month=updated_date.month + 1)
+
+        self.__get_expenses(updated_date.month, updated_date.year)
+        if(len(self.expenses) <= 0):
+            return
+        
+        self.date = updated_date
         self.update_month()
         self.update_chart()
 
@@ -48,8 +65,9 @@ class Month_expenses:
         last_button = ctk.CTkButton(header_frame, text = "<", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.last_month)
         last_button.pack(side = "left", padx = 40)
 
-        self.month_label = ctk.CTkLabel(header_frame, text = self.date.strftime("%B %Y"), font = ("Arial", 16))
+        self.month_label = ctk.CTkLabel(header_frame, font = ("Arial", 20))
         self.month_label.pack(side = "left", expand = True)
+        self.update_month()
 
         next_button = ctk.CTkButton(header_frame, text = ">", width = 30, height = 30, fg_color = "transparent", hover_color = "#3A3A3A", command = self.next_month)
         next_button.pack(side = "right", padx = 40)
@@ -61,19 +79,20 @@ class Month_expenses:
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=parent)
         self.canvas.get_tk_widget().pack(fill="both", expand=True)
+
+        self.__get_expenses(self.date.month, self.date.year)
         self.update_chart()
 
 
     def update_chart(self):
-        expenses = self.controller.getBiggestExpenses(self.date.month, self.date.year)
-        
-        for c in expenses:
-            expenses[c] *= -1
+        #convert negative to positive
+        for c in self.expenses:
+            self.expenses[c] *= -1
 
         self.ax.clear()   # Remove the old chart
 
-        labels = list(expenses.keys())
-        values = list(expenses.values())
+        labels = list(self.expenses.keys())
+        values = list(self.expenses.values())
 
         colors = ["#B8E64C", "#11C5C6", "#8CB4FF", "#9B84F3", "#D6AA19", "#C71B71"]
 
