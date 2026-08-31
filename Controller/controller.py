@@ -1,8 +1,10 @@
 from Model.dataManager import getFinances
+from Model.trading212 import Trading212
 
 class Controller:
     def __init__(self):
         self.finances = getFinances()
+        self.trading212 = Trading212()
 
     def getBankBalance(self):
         return self.finances.getAccountBalanceToDate()
@@ -68,3 +70,6 @@ class Controller:
 
     def getMonthlyInvestedBalance(self, year):
         return self.finances.getMonthlyInvestedBalance(year)
+
+    def getPortfolioValue(self):
+        return round(self.trading212.getUPL() + self.getInvestmentDeposits(),2)
