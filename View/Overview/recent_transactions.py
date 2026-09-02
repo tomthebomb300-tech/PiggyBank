@@ -10,17 +10,17 @@ class Recent_transactions:
 
     def create_frame(self, parent):
         transactions = self.controller.getRecentTransactions()
-        recent_transactions_card = ctk.CTkFrame(parent, fg_color="#1d2228", corner_radius=5)
+        recent_transactions_card = ctk.CTkFrame(parent, fg_color="#1d2228", corner_radius=40)
         recent_transactions_card.pack(side = "top", expand = True, fill = "both", padx = 10, pady = 10)
 
         label = ctk.CTkLabel(recent_transactions_card, text = "Recent Transactions", font = ("Arial", 20), text_color = "white")
-        label.pack(anchor = "w", pady = (20,10), padx = 20)
+        label.pack(anchor = "w", pady = (20,10), padx = 40)
 
         border_line = ctk.CTkFrame(recent_transactions_card, height=2, fg_color="#353b44")
-        border_line.pack(fill = "x", padx = 20, pady = (5, 10))
+        border_line.pack(fill = "x", padx = 40, pady = (5, 10))
 
-        scrollable = ctk.CTkScrollableFrame(recent_transactions_card, fg_color="#1d2228", corner_radius=5)
-        scrollable.pack(side = "left", expand = True, fill = "both", padx = 10, pady = 10)
+        scrollable = ctk.CTkScrollableFrame(recent_transactions_card, fg_color="#1d2228", corner_radius=40)
+        scrollable.pack(side = "left", expand = True, fill = "both", padx = 10, pady = (0,15))
 
         for key in transactions:
             transaction_card = ctk.CTkFrame(scrollable, fg_color="#1d2228")

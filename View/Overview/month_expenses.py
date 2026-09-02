@@ -13,7 +13,7 @@ class Month_expenses:
         
 
     def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
+        frame = ctk.CTkFrame(parent, fg_color = "#1d2228", corner_radius=40)
         frame.pack(side = "bottom", padx = 10, pady = 10)
         self.create_header(frame)
         self.create_chart(frame)
@@ -78,7 +78,7 @@ class Month_expenses:
         self.ax = self.fig.add_subplot(111)
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=parent)
-        self.canvas.get_tk_widget().pack(fill="both", expand=True)
+        self.canvas.get_tk_widget().pack(fill="both", expand=True, pady=(0,40))
 
         self.__get_expenses(self.date.month, self.date.year)
         self.update_chart()

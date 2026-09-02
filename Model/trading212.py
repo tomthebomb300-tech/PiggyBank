@@ -11,10 +11,10 @@ class Trading212:
         self.API_SECRET = os.getenv("TRADING212_SECRET_KEY")
 
     def getUPL(self):
-        url = "https://live.trading212.com/api/v0/equity/portfolio"
+        # url = "https://live.trading212.com/api/v0/equity/portfolio"
         
-        response = requests.get(url,auth=HTTPBasicAuth(self.API_KEY, self.API_SECRET))
-        if(response.status_code == 200):
-            data = response.json()[0]
-            return data["ppl"]
+        # response = requests.get(url,auth=HTTPBasicAuth(self.API_KEY, self.API_SECRET))
+        # if(response.status_code == 200):
+        #     data = response.json()[0]
+        #     return data["ppl"]
         return 0

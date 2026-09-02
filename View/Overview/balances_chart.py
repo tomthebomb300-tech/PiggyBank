@@ -16,7 +16,7 @@ class Balances_chart:
 
 
     def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color = "#1d2228")
+        frame = ctk.CTkFrame(parent, fg_color = "#1d2228", corner_radius=40)
         frame.pack(side = "bottom", fill = "both", expand = True, padx = 10, pady = 10)
         self.create_header(frame)
         self.create_chart(frame)
@@ -71,7 +71,7 @@ class Balances_chart:
         self.ax.set_facecolor("#1d2228")
 
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
-        self.canvas.get_tk_widget().pack(fill = "both", expand = True)
+        self.canvas.get_tk_widget().pack(fill = "both", expand = True, pady=(0,40))
 
         self.__get_chart_data(self.date.year)
         self.update_chart()

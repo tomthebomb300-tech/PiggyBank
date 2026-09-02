@@ -13,19 +13,19 @@ class Dashboard:
         self.create_frame(self.window)
 
     def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent,fg_color="#30353b")
+        frame = ctk.CTkFrame(parent, fg_color = "#30353b", corner_radius=40)
         frame.pack(fill = "both", padx=40, pady=40)
         self.create_dashboard(frame)
 
     def create_right_side(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color = "#30353b")
+        frame = ctk.CTkFrame(parent, fg_color = "#30353b", corner_radius=40)
         frame.pack(side = "right")
 
         Recent_transactions(frame, self.controller)
         Month_expenses(frame, self.controller)
 
     def create_left_side(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color="#30353b")
+        frame = ctk.CTkFrame(parent, fg_color = "#30353b", corner_radius=40)
         frame.pack(fill = "both", expand = True, side = "left")
         
         Summary_cards(frame, self.controller)

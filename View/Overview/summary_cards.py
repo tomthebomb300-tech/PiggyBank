@@ -8,14 +8,14 @@ class Summary_cards:
 
 
     def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color="#30353b")
+        frame = ctk.CTkFrame(parent, fg_color="#30353b", corner_radius=40)
         frame.pack(fill = "x")
         self.create_card(frame,"Account","€{0}".format(self.controller.getBankBalance()),"")
         self.create_card(frame,"Cash","€{0}".format(self.controller.getCashBalance()),"")
         self.create_card(frame,"Investments Value","€{0}".format(self.controller.getPortfolioValue()),"Deposited: €{0}".format(self.controller.getInvestmentDeposits()))
 
     def create_card(self, parent, title, value, subtitle):
-        card = ctk.CTkFrame(parent,fg_color="#1d2228")
+        card = ctk.CTkFrame(parent,fg_color="#1d2228", corner_radius=40)
         card.pack(side="left",expand=True,fill="both",padx=10, pady=10)
 
         title_label = ctk.CTkLabel(card,text=title,font=("Arial", 20),text_color="white")
