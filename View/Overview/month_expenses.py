@@ -74,7 +74,7 @@ class Month_expenses:
 
 
     def create_chart(self, parent):
-        self.fig = Figure(figsize=(6, 6), dpi=100)
+        self.fig = Figure(figsize=(6, 6), dpi=100, layout = "tight")
         self.ax = self.fig.add_subplot(111)
 
         self.canvas = FigureCanvasTkAgg(self.fig, master=parent)
@@ -100,6 +100,7 @@ class Month_expenses:
             values,
             colors=colors[:len(values)],
             startangle=90,
+            radius=1.2,
             wedgeprops=dict(width=0.35, edgecolor="#1d2228"),
             autopct="%1.0f%%",
             pctdistance=0.82
@@ -123,7 +124,6 @@ class Month_expenses:
         ) 
 
         self.fig.patch.set_facecolor("#1d2228")
-        self.ax.set_facecolor("#1d2228")
 
         for text in autotexts:
             text.set_color("white")
