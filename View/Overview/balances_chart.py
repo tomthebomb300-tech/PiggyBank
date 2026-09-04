@@ -1,25 +1,19 @@
 import customtkinter as ctk
 import numpy as np
-import mplcursors
 
 from datetime import datetime
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from scipy.interpolate import PchipInterpolator
 
-class Balances_chart:
-    def __init__(self, parent, controller):
+class Balances_chart(ctk.CTkFrame):
+    def __init__(self, parent, controller, fg_color, corner_radius):
+        super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
         self.controller = controller
         self.date = datetime(2026, 1, 1)
 
-        self.create_frame(parent)
-
-
-    def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color = "#1d2228", corner_radius=40)
-        frame.pack(side = "bottom", fill = "both", expand = True, padx = 10, pady = 10)
-        self.create_header(frame)
-        self.create_chart(frame)
+        self.create_header(self)
+        self.create_chart(self)
 
     def create_header(self, parent):
         frame = ctk.CTkFrame(parent, fg_color = "#1d2228")

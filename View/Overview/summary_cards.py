@@ -1,21 +1,16 @@
 import customtkinter as ctk
 
-class Summary_cards:
-    def __init__(self, parent, controller):
+class Summary_cards(ctk.CTkFrame):
+    def __init__(self, parent, controller, fg_color, corner_radius):
+        super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
         self.controller = controller
 
-        self.create_frame(parent)
+        self.create_card("Account","€{0}".format(self.controller.getBankBalance()),"")
+        self.create_card("Cash","€{0}".format(self.controller.getCashBalance()),"")
+        self.create_card("Investments Value","€{0}".format(self.controller.getPortfolioValue()),"Deposited: €{0}".format(self.controller.getInvestmentDeposits()))
 
-
-    def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color="#30353b", corner_radius=40)
-        frame.pack(fill = "x")
-        self.create_card(frame,"Account","€{0}".format(self.controller.getBankBalance()),"")
-        self.create_card(frame,"Cash","€{0}".format(self.controller.getCashBalance()),"")
-        self.create_card(frame,"Investments Value","€{0}".format(self.controller.getPortfolioValue()),"Deposited: €{0}".format(self.controller.getInvestmentDeposits()))
-
-    def create_card(self, parent, title, value, subtitle):
-        card = ctk.CTkFrame(parent,fg_color="#1d2228", corner_radius=40)
+    def create_card(self, title, value, subtitle):
+        card = ctk.CTkFrame(self,fg_color="#1d2228", corner_radius=40)
         card.pack(side="left",expand=True,fill="both",padx=10, pady=10)
 
         title_label = ctk.CTkLabel(card,text=title,font=("Arial", 20),text_color="white")

@@ -9,11 +9,13 @@ class Sidebar(ctk.CTkFrame):
         self.buttons = {}
 
         self.__create_buttons()
+        self.buttons["Overview"].set_active(True)
+        self.active_button = "Overview"
 
 
     def __create_buttons(self):
-        name = "Dashboard"
-        self.buttons[name] = self.__create_button("Images/Light/dashboard.png", name, self.display_dashboard)
+        name = "Overview"
+        self.buttons[name] = self.__create_button("Images/Light/overview.png", name, self.display_overview)
         name = "Transactions"
         self.buttons[name] = self.__create_button("Images/Light/transactions.png", name, self.display_transactions)
         name = "Investments"
@@ -27,17 +29,33 @@ class Sidebar(ctk.CTkFrame):
         button.pack(anchor = "w", fill = "x", pady = (0, 20))
         return button
 
-    def display_dashboard(self):
-        print("Dashboard")
+    def __clicked(self, button_name):
+        self.buttons[self.active_button].set_active(False)
+
+        self.buttons[button_name].set_active(True)
+        self.active_button = button_name
+
+    def display_overview(self):
+        name = "Overview"
+        self.__clicked(name)
+        self.controller.display_overview()
+        print(name)
 
     def display_transactions(self):
-        print("Transactions")
+        name = "Transactions"
+        self.__clicked(name)
+        self.controller.display_transactions()
+        print(name)
 
     def dislpay_investments(self):
-        print("Investments")
+        name = "Investments"
+        self.__clicked(name)
+        print(name)
 
     def display_settings(self):
-        print("Settings")
+        name = "Settings"
+        self.__clicked(name)
+        print(name)
 
 
 
@@ -62,8 +80,4 @@ class Navigation_button(ctk.CTkButton):
 
     def set_active(self, active):
         self.active = active
-
-        self.configure(
-            fg_color="#8B6EF8" if active else "transparent",
-            hover_color="#7C5EF0" if active else "#3A3A3A"
-        )
+        self.configure(fg_color="#990DD1" if active else "transparent")

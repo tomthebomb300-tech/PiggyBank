@@ -2,24 +2,23 @@ import customtkinter as ctk
 
 from PIL import Image
 
-class Recent_transactions:
-    def __init__(self, parent, controller):
-        self.parent = parent
+class Recent_transactions(ctk.CTkFrame):
+    def __init__(self, parent, controller, fg_color, corner_radius):
+        super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
+
         self.controller = controller
-        self.create_frame(parent)
+        self.create_frame()
 
-    def create_frame(self, parent):
+    def create_frame(self):
         transactions = self.controller.getRecentTransactions()
-        recent_transactions_card = ctk.CTkFrame(parent, fg_color="#1d2228", corner_radius=40)
-        recent_transactions_card.pack(side = "top", expand = True, fill = "both", padx = 10, pady = 10)
 
-        label = ctk.CTkLabel(recent_transactions_card, text = "Recent Transactions", font = ("Arial", 20), text_color = "white")
+        label = ctk.CTkLabel(self, text = "Recent Transactions", font = ("Arial", 20), text_color = "white")
         label.pack(anchor = "w", pady = (20,10), padx = 40)
 
-        border_line = ctk.CTkFrame(recent_transactions_card, height=2, fg_color="#353b44")
+        border_line = ctk.CTkFrame(self, height=2, fg_color="#353b44")
         border_line.pack(fill = "x", padx = 40, pady = (5, 10))
 
-        scrollable = ctk.CTkScrollableFrame(recent_transactions_card, fg_color="#1d2228", corner_radius=40)
+        scrollable = ctk.CTkScrollableFrame(self, fg_color="#1d2228", corner_radius=40)
         scrollable.pack(side = "left", expand = True, fill = "both", padx = 10, pady = (0,15))
 
         for key in transactions:

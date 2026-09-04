@@ -1,10 +1,19 @@
 from Model.dataManager import getFinances
 from Model.trading212 import Trading212
+from View.window import Window
 
 class Controller:
     def __init__(self):
         self.finances = getFinances()
         self.trading212 = Trading212()
+        self.window = Window("Finances", 1080, 1920, self)
+        self.window.run()
+
+    def display_overview(self):
+        self.window.display_page("overview")
+
+    def display_transactions(self):
+        self.window.display_page("transactions")
 
     def getBankBalance(self):
         return self.finances.getAccountBalanceToDate()

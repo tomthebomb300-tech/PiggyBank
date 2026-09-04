@@ -4,19 +4,15 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from datetime import datetime
 
-class Month_expenses:
-    def __init__(self, parent, controller):
+class Month_expenses(ctk.CTkFrame):
+    def __init__(self, parent, controller, fg_color, corner_radius):
+        super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
+
         self.controller = controller
         self.date = datetime(2025, 8, 1)
 
-        self.create_frame(parent)
-        
-
-    def create_frame(self, parent):
-        frame = ctk.CTkFrame(parent, fg_color = "#1d2228", corner_radius=40)
-        frame.pack(side = "bottom", padx = 10, pady = 10)
-        self.create_header(frame)
-        self.create_chart(frame)
+        self.create_header(self)
+        self.create_chart(self)
 
     def __get_expenses(self, month, year):
         self.expenses = self.controller.getBiggestExpenses(month, year)
