@@ -123,7 +123,7 @@ class Balances_chart(ctk.CTkFrame):
         self.vline = self.ax.axvline(x = 0, color = "#666666", linestyle = "--", alpha = 0.5)
         self.vline.set_visible(False)
 
-        self.tooltip = self.ax.text(0.85, 0.95, "", transform = self.ax.transAxes ,ha = "left", va ="top",fontsize=10,
+        self.tooltip = self.ax.text(0.80, 0.95, "", transform = self.ax.transAxes ,ha = "left", va ="top",fontsize=10,
                 bbox=dict(  boxstyle="round,pad=0.5",
                             facecolor="#2b2b2b",
                             edgecolor="white",

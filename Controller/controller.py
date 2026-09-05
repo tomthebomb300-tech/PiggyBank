@@ -82,3 +82,19 @@ class Controller:
 
     def getPortfolioValue(self):
         return round(self.trading212.getUPL() + self.getInvestmentDeposits(),2)
+
+
+    def getCategories(self):
+        return self.finances.getCategories()
+
+    def getIncome(self, category):
+        return self.finances.getIncome(category)
+
+    def getExpense(self, category):
+        return self.finances.getExpense(category)
+
+    def getStartDate(self):
+        return self.finances.getStartDate()
+
+    def getLastDate(self):
+        return self.finances.getLastDate()

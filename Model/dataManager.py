@@ -120,6 +120,22 @@ class Finances:
             monthly_invested_balance.append(round(invested_balance/100, 2)*-1)
         return monthly_invested_balance
 
+    def getCategories(self):
+        return self.df["Category"].unique()
+
+    def getIncome(self, category):
+        return self.df[(self.df["Category"] == category) & (self.df["Amount"] > 0)]["Amount"].sum()/100
+
+    def getExpense(self, category):
+        return self.df[(self.df["Category"] == category) & (self.df["Amount"] < 0)]["Amount"].sum()/100
+
+    def getStartDate(self):
+        return self.df["Date"].iloc[0]
+
+    def getLastDate(self):
+        return self.df["Date"].iloc[len(self.df)-1]
+
+
 
 
 
@@ -132,6 +148,8 @@ def getCSV():
 
 def getDataframe():
     df = pd.read_csv(getCSV())
+    # df = pd.read_csv(getGoogleSheet())
+    # df.to_csv("Data.csv")
     df = df[["Date", "Amount", "Payment Method", "Shop/Person", "Location", "Description", "Category"]]
     df["Date"] = pd.to_datetime(df["Date"], format="%d-%b-%Y")
     df = df.sort_values("Date")

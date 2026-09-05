@@ -71,7 +71,7 @@ class Navigation_button(ctk.CTkButton):
             height=34,
             corner_radius=18,
             fg_color="transparent",
-            hover_color="#7C5EF0",
+            hover_color="#2a3846",
             text_color="white",
             border_width=0
             )
@@ -80,4 +80,4 @@ class Navigation_button(ctk.CTkButton):
 
     def set_active(self, active):
         self.active = active
-        self.configure(fg_color="#990DD1" if active else "transparent")
+        self.configure(fg_color="#0c0e11" if active else "transparent")

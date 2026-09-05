@@ -10,7 +10,7 @@ class Window(ctk.CTk):
         super().__init__()
         self.controller = controller
 
-        self.title("Finaces")
+        self.title(name)
         self.geometry("{0}x{1}".format(width, height))
 
         self.window_frame = ctk.CTkFrame(self, fg_color = "#191c1f", corner_radius=0)
@@ -28,7 +28,7 @@ class Window(ctk.CTk):
         }
 
         self.current_page = None
-        self.display_page("overview")
+        self.display_page("transactions")
 
     def run(self):
         self.mainloop()

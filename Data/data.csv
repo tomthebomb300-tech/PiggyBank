@@ -3,7 +3,7 @@
 1,27-Aug-2024,7478.71,120,7358.71,3000.0,Cheque,Dadsie,Knockskehy,,Dadsie,,Cash Balance,2190.0,,5-Sep-2024,11-Sep-2024,20.5,339.24,Payslip 2410 (13-09-2024).pdf,,8-Sep-2024,14-Sep-2024,60.0,Paid
 2,27-Aug-2024,7457.16,120,7337.16,-21.55,Card,Supervalu,O'Keeffe's SuperValu Newmarket,Food,Food,,Total Balance,4742.35,,12-Sep-2024,18-Sep-2024,13.5,193.39,Payslip 2410 (20-09-2024).pdf,,15-Sep-2024,21-Sep-2024,60.0,Paid
 3,30-Aug-2024,7553.16,120,7433.16,96.0,Bank Transfer,Old Oak,Old Oak,Wages,Income,,,,,19-Sep-2024,25-Sep-2024,7.5,113.27,Payslip 2410 (27-09-2024).pdf,,22-Sep-2024,28-Sep-2024,60.0,Paid
-4,30-Aug-2024,7509.16,120,7389.16,-44.0,Card,Pennys,Penneys,2 cargo pants,Clothes,,Unpaid Rent,1600.0,,26-Sep-2024,2-Oct-2024,7.5,112.94,Payslip 2410 (04-10-2024).pdf,,29-Sep-2024,5-Oct-2024,60.0,Paid
+4,30-Aug-2024,7509.16,120,7389.16,-44.0,Card,Pennys,Penneys,2 cargo pants,Clothes,,Unpaid Rent,1680.0,,26-Sep-2024,2-Oct-2024,7.5,112.94,Payslip 2410 (04-10-2024).pdf,,29-Sep-2024,5-Oct-2024,60.0,Paid
 5,30-Aug-2024,7488.71,120,7368.71,-20.45,Card,Dinos,Dinos,Takeaway,Impulsive Food,,,,,3-Oct-2024,9-Oct-2024,11.5,165.39,Payslip 2410 (11-10-2024).pdf,,6-Oct-2024,12-Oct-2024,60.0,Paid
 6,30-Aug-2024,7364.75,120,7244.75,-123.96,Card,Amazon,,"Toothbrush, tongue scraper, bouner gear",Personal,,Michaels Owes,0.0,,10-Oct-2024,16-Oct-2024,12.0,182.77,Payslip 2410 (18-10-2024).pdf,,13-Oct-2024,19-Oct-2024,60.0,Paid
 7,2-Sep-2024,7343.15,120,7223.15,-21.6,Card,Wok N Roll,Wok'n'Roll Grand Parade,Spice Bag,Impulsive Food,,Denis Owes,0.0,,17-Oct-2024,23-Oct-2024,15.0,236.67,Payslip 2410 (25-10-2024).pdf,,20-Oct-2024,26-Oct-2024,60.0,Paid
@@ -102,8 +102,8 @@
 100,14-Oct-2024,3986.38,270,3716.38,-25.0,Card,BarberHood,BARBERHOOD,Haircut,Personal,,,,,,,,,,,2-Aug-2026,8-Aug-2026,80.0,Unpaid
 101,14-Oct-2024,3979.2,270,3709.2,-7.18,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,9-Aug-2026,15-Aug-2026,80.0,Unpaid
 102,15-Oct-2024,3961.89,270,3691.89,-17.31,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,16-Aug-2026,22-Aug-2026,80.0,Unpaid
-103,15-Oct-2024,3956.3,270,3686.3,-5.59,Card,Mr Price,MrPRICE Cork City,4 pack monster,Impulsive Food,,,,,,,,,,,23-Aug-2026,,,Unpaid
-104,15-Oct-2024,3911.27,270,3641.27,-45.03,Card,TopStep,,Futures 50k funded evaluation,Trading,,,,,,,,,,,,,,Unpaid
+103,15-Oct-2024,3956.3,270,3686.3,-5.59,Card,Mr Price,MrPRICE Cork City,4 pack monster,Impulsive Food,,,,,,,,,,,23-Aug-2026,29-Aug-2026,80.0,Unpaid
+104,15-Oct-2024,3911.27,270,3641.27,-45.03,Card,TopStep,,Futures 50k funded evaluation,Trading,,,,,,,,,,,30-Aug-2026,,,Unpaid
 105,16-Oct-2024,3898.83,270,3628.83,-12.44,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,,,,Unpaid
 106,17-Oct-2024,3896.83,270,3626.83,-2.0,Card,Euro Giant,"EuroGiant, Oliver Plunkett St., Cork.",Water,Impulsive Food,,,,,,,,,,,,,,Unpaid
 107,17-Oct-2024,3878.83,270,3608.83,-18.0,Card,Barber,City barbers,Haircut,Personal,,,,,,,,,,,,,,Unpaid
@@ -539,7 +539,7 @@
 537,27-Mar-2025,10429.05,7355,3074.05,-8.99,Card,Cotters Costcu,Costcutter,"Sweets, Hunky Dory's, Boost Bars",Impulsive Food,,,,,,,,,,,,,,
 538,27-Mar-2025,10417.05,7355,3062.05,-12.0,Card,Cork Button Co,Cork Button Company,Tailored Waistcoat,Clothes,,,,,,,,,,,,,,
 539,27-Mar-2025,10413.77,7355,3058.77,-3.28,Card,Centra,Clifford's Centra,"Sweets, Oreo's",Impulsive Food,,,,,,,,,,,,,,
-540,27-Mar-2025,10341.79,7355,2986.79,-71.98,Card,Amazon,,Bought hyperX cloud III headphones,Personal,,,,,,,,,,,,,,
+540,27-Mar-2025,10341.79,7355,2986.79,-71.98,Card,Amazon,,Bought hyperX cloud III headphones,Entertainment,,,,,,,,,,,,,,
 541,28-Mar-2025,10332.78,7355,2977.78,-9.01,Card,Lidl,Lidl,"Cookies, ice-cream, peri peri, black bean sauce",Food,,,,,,,,,,,,,,
 542,28-Mar-2025,10312.78,7355,2957.78,-20.0,Card,Trading212,,€20 to S&P 500,Investing,,,,,,,,,,,,,,
 543,28-Mar-2025,10545.82,7355,3190.82,233.04,Card,Voodoo,Voodoo Rooms,Wages,Income,,,,,,,,,,,,,,
@@ -1540,7 +1540,7 @@
 1538,31-Mar-2026,2368.09,2165,203.09,80.0,Cash,,,Money taken from account,Null,,,,,,,,,,,,,,
 1539,31-Mar-2026,2362.09,2165,197.09,-6.0,Bank Transfer,BOI,,Maintaining account,BOI Fees,,,,,,,,,,,,,,
 1540,31-Mar-2026,2355.85,2165,190.85,-6.24,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
-1541,31-Mar-2026,195.85,5,190.85,-2160.0,Cash,Pat Sheehan,T23 X499,Rent - 27 weeks,,,,,,,,,,,,,,,
+1541,31-Mar-2026,195.85,5,190.85,-2160.0,Cash,Pat Sheehan,T23 X499,Rent - 27 weeks,Rent,,,,,,,,,,,,,,
 1542,31-Mar-2026,190.85,0,190.85,-5.0,Cash,Lidl,Lidl Cork Cornmarket,"Monster, cookies",Food,,,,,,,,,,,,,,
 1543,1-Apr-2026,180.33,0,180.33,-10.52,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
 1544,2-Apr-2026,169.31,0,169.31,-11.02,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
@@ -1931,7 +1931,7 @@
 1929,21-Aug-2026,4763.17,1950,2813.17,-50.0,Bank Transfer,Trading212,,€50 into brokerage account,Investing,,,,,,,,,,,,,,
 1930,21-Aug-2026,4752.24,1950,2802.24,-10.93,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
 1931,21-Aug-2026,4742.24,1950,2792.24,-10.0,Card,CostCutter,Costcutter,Food,Food,,,,,,,,,,,,,,
-1932,22-Aug-2026,4942.24,2150,2792.24,200.0,Cash,Mumsie,Knockskehy,Labour,Food,,,,,,,,,,,,,,
+1932,22-Aug-2026,4942.24,2150,2792.24,200.0,Cash,Mumsie,Knockskehy,Labour,Mumsie,,,,,,,,,,,,,,
 1933,22-Aug-2026,4930.29,2150,2780.29,-11.95,Card,Irish Rail,Kent,Train ticket,Transport,,,,,,,,,,,,,,
 1934,22-Aug-2026,4918.64,2150,2768.64,-11.65,Card,Irish Rail,Banteer,Train ticket,Transport,,,,,,,,,,,,,,
 1935,22-Aug-2026,4908.01,2150,2758.01,-10.63,Card,Caseys,Freemount,Food,Food,,,,,,,,,,,,,,
