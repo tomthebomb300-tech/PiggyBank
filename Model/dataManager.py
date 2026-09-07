@@ -123,11 +123,11 @@ class Finances:
     def getCategories(self):
         return self.df["Category"].unique()
 
-    def getIncome(self, category):
-        return self.df[(self.df["Category"] == category) & (self.df["Amount"] > 0)]["Amount"].sum()/100
+    def getIncome(self, category, start_date, last_date):
+        return self.df[(self.df["Category"] == category) & (self.df["Amount"] > 0) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)]["Amount"].sum()/100
 
-    def getExpense(self, category):
-        return self.df[(self.df["Category"] == category) & (self.df["Amount"] < 0)]["Amount"].sum()/100
+    def getExpense(self, category, start_date, last_date):
+        return self.df[(self.df["Category"] == category) & (self.df["Amount"] < 0) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)]["Amount"].sum()/100
 
     def getStartDate(self):
         return self.df["Date"].iloc[0]

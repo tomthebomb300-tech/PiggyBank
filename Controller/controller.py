@@ -87,11 +87,13 @@ class Controller:
     def getCategories(self):
         return self.finances.getCategories()
 
-    def getIncome(self, category):
-        return self.finances.getIncome(category)
-
-    def getExpense(self, category):
-        return self.finances.getExpense(category)
+    def getIncomeExpense(self, categories, start_date, last_date):
+        dict = {}
+        for c in categories:
+            income = self.finances.getIncome(c, start_date, last_date)
+            expense = self.finances.getExpense(c, start_date, last_date)
+            dict[c] = {"income": income, "expense": expense}
+        return dict
 
     def getStartDate(self):
         return self.finances.getStartDate()
