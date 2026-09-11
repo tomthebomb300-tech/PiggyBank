@@ -3,41 +3,34 @@ import customtkinter as ctk
 from PIL import Image
 
 class Category_selector(ctk.CTkFrame):
-    def __init__(self, parent, categories, corner_radius):
-        super().__init__(parent, fg_color="#1d2228", corner_radius=corner_radius)
+    def __init__(self, parent, categories, fg_color, corner_radius):
+        super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
+        button_frame = ctk.CTkScrollableFrame(self, fg_color = "transparent")
+        button_frame.pack(padx = 20, pady = 20, expand = True, fill = "y")
 
-        self.selected_frame = ctk.CTkFrame(self, fg_color="#306901", corner_radius=0)
-        self.selected_frame.pack(fill = "x", side = "right", anchor = "n", padx = 20, pady = 20)
-        label = ctk.CTkLabel(self.selected_frame, text = "Selected", font = ("Arial", 20), text_color = "white")
-        label.pack(padx=50)
-
-        self.unselected_frame = ctk.CTkFrame(self, fg_color = "#680404", corner_radius=0)
-        self.unselected_frame.pack(fill = "x", side = "left", anchor = "n", padx = 20, pady = 20)
-        label = ctk.CTkLabel(self.unselected_frame, text = "Un-Selected", font = ("Arial", 20), text_color = "white", corner_radius=0)
-        label.pack(padx = 50)
-
-        self.selected = {}
-        self.unselected = {}
+        self.selected = []
+        self.unselected = []
+        self.buttons = {}
         for c in categories:
-            self.selected[c] = self.__create_button(self.selected_frame, "Images/Light/settings.png", c, self.unselect, "transparent")
-
+            self.buttons[c] = self.__create_button(button_frame, "Images/Light/settings.png", c, self.unselect, "green")
+            self.selected.append(c)
         
 
     def __create_button(self, parent, img_path, name, command, colour):
         img = Image.open(img_path)
-        button = ctk.CTkButton(parent, text = name, image=ctk.CTkImage(light_image=img, dark_image=img, size = (16,16)), command=lambda: command(name), fg_color=colour, corner_radius=0)
-        button.pack(anchor = "w", fill = "x")
+        button = ctk.CTkButton(parent, text = name, font=("Arial", 15), image=ctk.CTkImage(light_image=img, dark_image=img, size = (16,16)), command=lambda: command(name), fg_color=colour, corner_radius=10)
+        button.pack(anchor = "w", fill = "x", padx = 0, pady = (0,5))
         return button
 
     def select(self, category):
-        self.unselected[category].pack_forget()
-        del self.unselected[category]
-        self.selected[category] = self.__create_button(self.selected_frame, "Images/Light/settings.png", category, self.unselect, "transparent")
+        self.buttons[category].configure(fg_color = "green", command = lambda: self.unselect(category))
+        self.unselected.remove(category)
+        self.selected.append(category)
 
     def unselect(self, category):
-        self.selected[category].pack_forget()
-        del self.selected[category]
-        self.unselected[category] = self.__create_button(self.unselected_frame, "Images/Light/settings.png", category, self.select, "transparent")
+        self.buttons[category].configure(fg_color = "crimson", command = lambda: self.select(category))
+        self.selected.remove(category)
+        self.unselected.append(category)
 
     def get_selected(self):
-        return list(self.selected.keys())
+        return self.selected
