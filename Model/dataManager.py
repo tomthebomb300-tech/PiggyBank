@@ -129,6 +129,11 @@ class Finances:
     def getExpense(self, category, start_date, last_date):
         return self.df[(self.df["Category"] == category) & (self.df["Amount"] < 0) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)]["Amount"].sum()/100
 
+    def getEntries(self, categories, start_date, last_date):
+        filtered_df = self.df[(self.df["Category"].isin(categories)) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)][["Date", "Amount", "Payment Method", "Shop/Person", "Description", "Category"]]
+        filtered_df["Amount"] /= 100
+        return filtered_df.to_dict(orient="records")
+
     def getStartDate(self):
         return self.df["Date"].iloc[0]
 

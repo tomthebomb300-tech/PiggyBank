@@ -3,7 +3,7 @@ import customtkinter as ctk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-class Content(ctk.CTkFrame):
+class Pies(ctk.CTkFrame):
     def __init__(self, parent, fg_color, corner_radius):
         super().__init__(parent, fg_color = fg_color, corner_radius = corner_radius)
         self.create_pie_charts(self)
@@ -22,11 +22,11 @@ class Content(ctk.CTkFrame):
         self.exp_canvas.get_tk_widget().pack(side = "right", fill="both", expand=True, pady=40, padx=40)
 
     def update(self, income, expense):
-        self.update_pie(self.inc_fig, self.inc_ax, self.inc_canvas, list(income.keys()), list(income.values()))
-        self.update_pie(self.exp_fig, self.exp_ax, self.exp_canvas, list(expense.keys()), list(expense.values()))
+        self.update_pie(self.inc_fig, self.inc_ax, self.inc_canvas, list(income.keys()), list(income.values()),sign="")
+        self.update_pie(self.exp_fig, self.exp_ax, self.exp_canvas, list(expense.keys()), list(expense.values()), sign="-")
 
 
-    def update_pie(self, fig, ax, canvas, labels, values):
+    def update_pie(self, fig, ax, canvas, labels, values, sign):
         ax.clear()   # Remove the old chart
         colors = ["#B8E64C", "#11C5C6", "#8CB4FF", "#9B84F3", "#D6AA19", "#C71B71"]
 
@@ -55,7 +55,7 @@ class Content(ctk.CTkFrame):
             if percentage < 2:
                 autotext.set_text("")
 
-        ax.text(0, 0, f"€{total:,}", ha="center", va="center", fontsize=18, fontweight="bold", color="white")
+        ax.text(0, 0, "{0}€{1}".format(sign, total), ha="center", va="center", fontsize=18, fontweight="bold", color="white")
 
         fig.patch.set_facecolor("#1d2228")
 
@@ -103,9 +103,9 @@ class Content(ctk.CTkFrame):
                 percentage = values[i] / total * 100
                 tooltip.xy = (event.xdata, event.ydata)
 
-                x_offset = -140 if event.x > canvas_width - 140 else 15
-                y_offset = -60 if event.y > canvas_height - 60 else 15
-                tooltip.set_position((0, 0))
+                x_offset = -75 if event.x > canvas_width - 200 else 15
+                y_offset = -50 if event.y > canvas_height - 100 else 15
+                tooltip.set_position((x_offset, y_offset))
 
                 tooltip.set_text(
                     f"{labels[i]}\n"

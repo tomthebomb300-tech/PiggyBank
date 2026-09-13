@@ -2,7 +2,8 @@ import customtkinter as ctk
 
 from View.Transactions.date_range_slider import Date_range_slider
 from View.Transactions.category_selector import Category_selector
-from View.Transactions.content import Content
+from View.Transactions.pies import Pies
+from View.Transactions.table import Table
 
 class Transactions(ctk.CTkFrame):
     def __init__(self, parent, controller, fg_color, corner_radius):
@@ -26,9 +27,13 @@ class Transactions(ctk.CTkFrame):
 
         self.category_selector = Category_selector(parent=self, categories=self.controller.getCategories(), fg_color="#1d2228", corner_radius=40)
         self.category_selector.pack(side = "left", fill = "y", padx = 20, pady = 20)
-        
-        self.content = Content(self, fg_color="#1d2228", corner_radius=40)
-        self.content.pack(side = "right", expand = True, padx=20, pady=20, anchor = "n")
+
+        self.content_pages = {
+            "pies": Pies(self, fg_color="#1d2228", corner_radius=40),
+            "table": Table(self, fg_color="#1d2228", corner_radius=40)
+        }
+        self.current_content_page = None
+        self.display_content_page("table")
 
         self.fetch()
         
@@ -41,4 +46,12 @@ class Transactions(ctk.CTkFrame):
         income = self.controller.getIncome(self.category_selector.get_selected(), self.start_date, self.last_date)
         expense = self.controller.getExpense(self.category_selector.get_selected(), self.start_date, self.last_date)
         for key in expense: expense[key] *= -1
-        self.content.update(income, expense)
+        self.content_pages["pies"].update(income, expense)
+        self.content_pages["table"].update_transactions(self.controller.getTransactions(self.category_selector.get_selected(), self.start_date, self.last_date))
+
+    def display_content_page(self, page_name):
+        if self.current_content_page:
+            self.current_content_page.pack_forget()
+
+        self.current_content_page = self.content_pages[page_name]
+        self.current_content_page.pack(side = "right", fill = "both", expand = True, padx=20, pady=20, anchor = "n")

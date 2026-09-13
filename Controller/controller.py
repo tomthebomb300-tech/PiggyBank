@@ -103,6 +103,9 @@ class Controller:
                 dict[c] = expense
         return dict
 
+    def getTransactions(self, categories, start_date, last_date):
+        return self.finances.getEntries(categories, start_date, last_date)
+
 
     def getStartDate(self):
         return self.finances.getStartDate()
