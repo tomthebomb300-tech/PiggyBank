@@ -8,11 +8,11 @@ class Category_selector(ctk.CTkFrame):
 
         frame = ctk.CTkFrame(self, fg_color="transparent")
         frame.pack(side = "top", padx = 20, pady = (40,0))
-        select_all_button = ctk.CTkButton(frame, text="", fg_color="green", command=self.select_all)
-        select_all_button.pack(side = "left")
+        select_all_button = ctk.CTkButton(frame, text="", width = 50, height = 50, corner_radius=18, fg_color="green", command=self.select_all)
+        select_all_button.pack(side = "left", padx = (0,10))
 
-        unselect_all_button = ctk.CTkButton(frame, text="", fg_color="crimson", command=self.unselect_all)
-        unselect_all_button.pack(side = "right")
+        unselect_all_button = ctk.CTkButton(frame, text="", width = 50, height = 50, corner_radius=18, fg_color="crimson", command=self.unselect_all)
+        unselect_all_button.pack(side = "right", padx = (10,0))
 
         button_frame = ctk.CTkScrollableFrame(self, fg_color = "transparent")
         button_frame.pack(padx = 20, pady = 20, expand = True, fill = "y", side = "bottom")

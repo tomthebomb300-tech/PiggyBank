@@ -21,6 +21,7 @@ class Window(ctk.CTk):
 
         self.content = ctk.CTkFrame(self.window_frame, fg_color="#191c1f")
         self.content.pack(fill = "both", expand = True)
+        
 
         self.pages = {
             "overview": Overview(self.content, self.controller, fg_color ="#30353b", corner_radius = 40),

@@ -11,7 +11,7 @@ class Table(ctk.CTkFrame):
         style = ttk.Style()
         style.theme_use("default")
 
-        style.configure("Treeview",background="#2a2d2e",foreground="white",rowheight=30,fieldbackground="#2a2d2e",bordercolor="#1e1e1e",borderwidth=0,)
+        style.configure("Treeview",background="transparent",foreground="white",rowheight=30,fieldbackground="#1d2228")
         style.map("Treeview", background=[("selected", "#1f538d")])
 
         style.configure("Treeview.Heading",background="#343638",foreground="white",relief="flat",font=("Arial", 11, "bold"))
