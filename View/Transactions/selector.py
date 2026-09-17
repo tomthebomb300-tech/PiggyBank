@@ -2,21 +2,21 @@ import customtkinter as ctk
 
 from PIL import Image
 
-class Content_selector(ctk.CTkFrame):
-    def __init__(self, parent, fg_color, content_pages, display_content_page_cmd):
+class Selector(ctk.CTkFrame):
+    def __init__(self, parent, fg_color, items, display_cmd):
         super().__init__(parent, fg_color=fg_color)
 
-        self.display_content_page_cmd = display_content_page_cmd
+        self.display_cmd = display_cmd
 
         self.buttons = {}
-        for page in content_pages:
-            self.buttons[page] = self.create_button("Images/Light/{0}.png".format(page), page)
+        for item in items:
+            self.buttons[item] = self.create_button("Images/Light/{0}.png".format(item), item)
 
         if(len(self.buttons) > 0):
             button_name = list(self.buttons.keys())[0]
             self.buttons[button_name].set_active(True)
             self.active_button = button_name
-            self.display_content_page_cmd(button_name)
+            self.display_cmd(button_name)
 
 
     def create_button(self, img_path, name):
@@ -29,7 +29,7 @@ class Content_selector(ctk.CTkFrame):
         self.buttons[self.active_button].set_active(False)
         self.buttons[button_name].set_active(True)
         self.active_button = button_name
-        self.display_content_page_cmd(button_name)
+        self.display_cmd(button_name)
 
 
 class Navigation_button(ctk.CTkButton):

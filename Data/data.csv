@@ -1,9 +1,9 @@
 ,Date,Total Balance,Cash Balance,Account Balance,Amount,Payment Method,Shop/Person,Location,Description,Category,Unnamed: 10,Unnamed: 11,Unnamed: 12,Unnamed: 13,Start Date,End Date,Hours,Net Pay,Payslip,Unnamed: 19,Start Date.1,End Date.1,Rent,Paid/ Unpaid
-0,26-Aug-2024,4478.71,120,4358.71,-65.0,Card,Sports Store,Central Sports Stores,Black Shoes,Clothes,,Account Balance,2552.35,,29-Aug-2024,4-Sep-2024,5.5,37.55,Payslip 2410 (06-09-2024).pdf,,1-Sep-2024,7-Sep-2024,60.0,Paid
-1,27-Aug-2024,7478.71,120,7358.71,3000.0,Cheque,Dadsie,Knockskehy,,Dadsie,,Cash Balance,2190.0,,5-Sep-2024,11-Sep-2024,20.5,339.24,Payslip 2410 (13-09-2024).pdf,,8-Sep-2024,14-Sep-2024,60.0,Paid
-2,27-Aug-2024,7457.16,120,7337.16,-21.55,Card,Supervalu,O'Keeffe's SuperValu Newmarket,Food,Food,,Total Balance,4742.35,,12-Sep-2024,18-Sep-2024,13.5,193.39,Payslip 2410 (20-09-2024).pdf,,15-Sep-2024,21-Sep-2024,60.0,Paid
+0,26-Aug-2024,4478.71,120,4358.71,-65.0,Card,Sports Store,Central Sports Stores,Black Shoes,Clothes,,Account Balance,2220.84,,29-Aug-2024,4-Sep-2024,5.5,37.55,Payslip 2410 (06-09-2024).pdf,,1-Sep-2024,7-Sep-2024,60.0,Paid
+1,27-Aug-2024,7478.71,120,7358.71,3000.0,Cheque,Dadsie,Knockskehy,,Dadsie,,Cash Balance,1670.0,,5-Sep-2024,11-Sep-2024,20.5,339.24,Payslip 2410 (13-09-2024).pdf,,8-Sep-2024,14-Sep-2024,60.0,Paid
+2,27-Aug-2024,7457.16,120,7337.16,-21.55,Card,Supervalu,O'Keeffe's SuperValu Newmarket,Food,Food,,Total Balance,3890.84,,12-Sep-2024,18-Sep-2024,13.5,193.39,Payslip 2410 (20-09-2024).pdf,,15-Sep-2024,21-Sep-2024,60.0,Paid
 3,30-Aug-2024,7553.16,120,7433.16,96.0,Bank Transfer,Old Oak,Old Oak,Wages,Income,,,,,19-Sep-2024,25-Sep-2024,7.5,113.27,Payslip 2410 (27-09-2024).pdf,,22-Sep-2024,28-Sep-2024,60.0,Paid
-4,30-Aug-2024,7509.16,120,7389.16,-44.0,Card,Pennys,Penneys,2 cargo pants,Clothes,,Unpaid Rent,1680.0,,26-Sep-2024,2-Oct-2024,7.5,112.94,Payslip 2410 (04-10-2024).pdf,,29-Sep-2024,5-Oct-2024,60.0,Paid
+4,30-Aug-2024,7509.16,120,7389.16,-44.0,Card,Pennys,Penneys,2 cargo pants,Clothes,,Unpaid Rent,1840.0,,26-Sep-2024,2-Oct-2024,7.5,112.94,Payslip 2410 (04-10-2024).pdf,,29-Sep-2024,5-Oct-2024,60.0,Paid
 5,30-Aug-2024,7488.71,120,7368.71,-20.45,Card,Dinos,Dinos,Takeaway,Impulsive Food,,,,,3-Oct-2024,9-Oct-2024,11.5,165.39,Payslip 2410 (11-10-2024).pdf,,6-Oct-2024,12-Oct-2024,60.0,Paid
 6,30-Aug-2024,7364.75,120,7244.75,-123.96,Card,Amazon,,"Toothbrush, tongue scraper, bouner gear",Personal,,Michaels Owes,0.0,,10-Oct-2024,16-Oct-2024,12.0,182.77,Payslip 2410 (18-10-2024).pdf,,13-Oct-2024,19-Oct-2024,60.0,Paid
 7,2-Sep-2024,7343.15,120,7223.15,-21.6,Card,Wok N Roll,Wok'n'Roll Grand Parade,Spice Bag,Impulsive Food,,Denis Owes,0.0,,17-Oct-2024,23-Oct-2024,15.0,236.67,Payslip 2410 (25-10-2024).pdf,,20-Oct-2024,26-Oct-2024,60.0,Paid
@@ -103,9 +103,9 @@
 101,14-Oct-2024,3979.2,270,3709.2,-7.18,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,9-Aug-2026,15-Aug-2026,80.0,Unpaid
 102,15-Oct-2024,3961.89,270,3691.89,-17.31,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,16-Aug-2026,22-Aug-2026,80.0,Unpaid
 103,15-Oct-2024,3956.3,270,3686.3,-5.59,Card,Mr Price,MrPRICE Cork City,4 pack monster,Impulsive Food,,,,,,,,,,,23-Aug-2026,29-Aug-2026,80.0,Unpaid
-104,15-Oct-2024,3911.27,270,3641.27,-45.03,Card,TopStep,,Futures 50k funded evaluation,Trading,,,,,,,,,,,30-Aug-2026,,,Unpaid
-105,16-Oct-2024,3898.83,270,3628.83,-12.44,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,,,,Unpaid
-106,17-Oct-2024,3896.83,270,3626.83,-2.0,Card,Euro Giant,"EuroGiant, Oliver Plunkett St., Cork.",Water,Impulsive Food,,,,,,,,,,,,,,Unpaid
+104,15-Oct-2024,3911.27,270,3641.27,-45.03,Card,TopStep,,Futures 50k funded evaluation,Trading,,,,,,,,,,,30-Aug-2026,5-Sep-2026,80.0,Unpaid
+105,16-Oct-2024,3898.83,270,3628.83,-12.44,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,6-Sep-2026,12-Sep-2026,80.0,Unpaid
+106,17-Oct-2024,3896.83,270,3626.83,-2.0,Card,Euro Giant,"EuroGiant, Oliver Plunkett St., Cork.",Water,Impulsive Food,,,,,,,,,,,13-Sep-2026,,,Unpaid
 107,17-Oct-2024,3878.83,270,3608.83,-18.0,Card,Barber,City barbers,Haircut,Personal,,,,,,,,,,,,,,Unpaid
 108,18-Oct-2024,3863.72,270,3593.72,-15.11,Card,Lidl,Lidl,Food,Food,,,,,,,,,,,,,,Unpaid
 109,18-Oct-2024,4046.49,270,3776.49,182.77,Bank Transfer,Voodoo ,Voodoo Rooms,Wages,Income,,,,,,,,,,,,,,Unpaid
@@ -1958,3 +1958,50 @@
 1956,28-Aug-2026,4761.79,2190,2571.79,-13.63,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
 1957,28-Aug-2026,4757.35,2190,2567.35,-4.44,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
 1958,16-Aug-2026,4742.35,2190,2552.35,-15.0,Card,Eskimo's,Eskimo Pizza (North),Pizza + 2 dips,Food,,,,,,,,,,,,,,
+1959,29-Aug-2026,4739.36,2190,2549.36,-2.99,Card,CostCutter,Costcutter,sweets,Food,,,,,,,,,,,,,,
+1960,30-Aug-2026,4723.46,2190,2533.46,-15.9,Card,Eskimo's,Eskimo Pizza (North),Pizza + 2 dips,Food,,,,,,,,,,,,,,
+1961,30-Aug-2026,4712.1,2190,2522.1,-11.36,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1962,30-Aug-2026,4709.95,2190,2519.95,-2.15,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1963,30-Aug-2026,4707.77,2190,2517.77,-2.18,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1964,31-Aug-2026,4701.77,2190,2511.77,-6.0,Bank Transfer,BOI,,Fees,BOI Fees,,,,,,,,,,,,,,
+1965,31-Aug-2026,4689.82,2190,2499.82,-11.95,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1966,31-Aug-2026,4675.39,2190,2485.39,-14.43,Card,Apex Trader Funding,,Funded Account,Trading,,,,,,,,,,,,,,
+1967,31-Aug-2026,4675.1,2190,2485.1,-0.29,Card,BOI,,FX Fee,Trading,,,,,,,,,,,,,,
+1968,29-Aug-2026,4775.1,2290,2485.1,100.0,Cash,Musmie,,Labour,Mumsie,,,,,,,,,,,,,,
+1969,1-Sep-2026,4762.99,2290,2472.99,-12.11,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1970,1-Sep-2026,4760.81,2290,2470.81,-2.18,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1971,1-Sep-2026,4754.57,2290,2464.57,-6.24,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1972,2-Sep-2026,4745.61,2290,2455.61,-8.96,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1973,2-Sep-2026,4742.72,2290,2452.72,-2.89,Card,CostCutter,Costcutter,Sweets,Food,,,,,,,,,,,,,,
+1974,3-Sep-2026,4737.1,2290,2447.1,-5.62,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1975,3-Sep-2026,4724.54,2290,2434.54,-12.56,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1976,4-Sep-2026,4880.09,2290,2590.09,155.55,Bank Transfer,Voodoo,Voodoo Rooms,Wages,Income,,,,,,,,,,,,,,
+1977,4-Sep-2026,4830.09,2290,2540.09,-50.0,Bank Transfer,Trading212,,€50 into brokerage account,Investing,,,,,,,,,,,,,,
+1978,4-Sep-2026,4818.03,2290,2528.03,-12.06,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1979,4-Sep-2026,4815.85,2290,2525.85,-2.18,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1980,5-Sep-2026,4810.9,2290,2520.9,-4.95,Card,Irish Rail,Kent,Train ticket Cork -> Mallow,Transport,,,,,,,,,,,,,,
+1981,5-Sep-2026,4734.9,2290,2444.9,-76.0,Card,Sports Direct,Sports Direct,2 * pair shoes,Clothes,,,,,,,,,,,,,,
+1982,5-Sep-2026,4732.4,2290,2442.4,-2.5,Card,CostCutter,Costcutter,Drink,Food,,,,,,,,,,,,,,
+1983,5-Sep-2026,4832.4,2390,2442.4,100.0,Cash,Mumsie,,Labour,Mumsie,,,,,,,,,,,,,,
+1984,6-Sep-2026,4816.5,2390,2426.5,-15.9,Card,Eskimo's,Eskimo Pizza (North),Pizza + 2 dips,Food,,,,,,,,,,,,,,
+1985,6-Sep-2026,4803.4,2390,2413.4,-13.1,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1986,6-Sep-2026,4797.11,2390,2407.11,-6.29,Card,Chemist Warehouse,Chemist Warehouse Cornmarket,Mouthwash,Personal,,,,,,,,,,,,,,
+1987,7-Sep-2026,4794.93,2390,2404.93,-2.18,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1988,7-Sep-2026,4778.92,2390,2388.92,-16.01,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1989,8-Sep-2026,4776.74,2390,2386.74,-2.18,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1990,8-Sep-2026,4772.14,2390,2382.14,-4.6,Card,Tesco,Tesco Superstore,Mi Wadi,Food,,,,,,,,,,,,,,
+1991,8-Sep-2026,4761.82,2390,2371.82,-10.32,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1992,9-Sep-2026,4752.46,2390,2362.46,-9.36,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1993,9-Sep-2026,4397.46,2390,2007.46,-355.0,Card,Flyefit,FLYEfit Cork,1 year membership,Personal,,,,,,,,,,,,,,
+1994,10-Sep-2026,4381.12,2390,1991.12,-16.34,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1995,11-Sep-2026,4759.91,2390,2369.91,378.79,Bank Transfer,Voodoo,Voodoo Rooms,Wages,Income,,,,,,,,,,,,,,
+1996,11-Sep-2026,4709.91,2390,2319.91,-50.0,Bank Transfer,Trading212,,€50 into brokerage account,Investing,,,,,,,,,,,,,,
+1997,11-Sep-2026,4684.91,2390,2294.91,-25.0,Card,City Barbers,City barbers,Haircut + tip,Personal,,,,,,,,,,,,,,
+1998,11-Sep-2026,4677.48,2390,2287.48,-7.43,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+1999,11-Sep-2026,4672.49,2390,2282.49,-4.99,Card,Lidl,Lidl Cork Cornmarket,Buttons,Food,,,,,,,,,,,,,,
+2000,12-Sep-2026,4644.96,2390,2254.96,-27.53,Card,Lidl,Lidl Kanturk,Food for stuffed chicken,Food Non-Personal,,,,,,,,,,,,,,
+2001,12-Sep-2026,4633.01,2390,2243.01,-11.95,Card,Irish Rail,Kent,Ticket Cork -> Banteer,Transport,,,,,,,,,,,,,,
+2002,12-Sep-2026,4625.86,2390,2235.86,-7.15,Card,Inver petrol station,Inver Racecourse Junction,"Monster, volvic water",Food,,,,,,,,,,,,,,
+2003,12-Sep-2026,3805.86,1570,2235.86,-820.0,Cash,Alan Sullivan,"52°15'48.7""N 8°56'13.9""W","500 to merc guy, 320 service",Car Maintenance,,,,,,,,,,,,,,
+2004,13-Sep-2026,3790.84,1570,2220.84,-15.02,Card,Lidl,Lidl Cork Cornmarket,Food,Food,,,,,,,,,,,,,,
+2005,12-Sep-2026,3890.84,1670,2220.84,100.0,Cash,Mumsie,Knockskehy,Labour,Mumsie,,,,,,,,,,,,,,
