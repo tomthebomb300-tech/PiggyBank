@@ -11,7 +11,11 @@ class Candle_stick_chart(ctk.CTkFrame):
 
         self.timeframe = "W"
         self.ohlc = self.controller.getOHLC(self.timeframe)
-   
+
+        self.max_candles = 100
+        self.first_candle = max(0, len(self.ohlc)-self.max_candles)
+        self.dragging = False
+
         self.create_chart(self)
         self.update_chart()
 
@@ -25,6 +29,8 @@ class Candle_stick_chart(ctk.CTkFrame):
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
         self.canvas.get_tk_widget().pack(fill = "both", expand = True, pady=(0,40))
 
+        self.canvas.mpl_connect("scroll_event", self.on_scroll)
+
     def update_chart(self):
         self.ax.clear()
         self.add_tooltip()
@@ -35,12 +41,14 @@ class Candle_stick_chart(ctk.CTkFrame):
             style="charles",
             ax=self.ax
         )
+        self.ax.set_xlim(self.first_candle-0.5, self.first_candle+self.max_candles-0.5)
+        self.canvas.draw_idle()
 
     def add_tooltip(self):
             self.vline = self.ax.axvline(x = 0, color = "#666666", linestyle = "--", alpha = 0.5)
             self.vline.set_visible(False)
 
-            self.tooltip = self.ax.text(0.80, 0.95, "", transform = self.ax.transAxes ,ha = "left", va ="top",fontsize=10,
+            self.tooltip = self.ax.text(0.92, 0.95, "", transform = self.ax.transAxes ,ha = "left", va ="top",fontsize=10,
                     bbox=dict(  boxstyle="round,pad=0.5",
                                 facecolor="#2b2b2b",
                                 edgecolor="white",
@@ -98,3 +106,21 @@ class Candle_stick_chart(ctk.CTkFrame):
         elif(self.timeframe == "YE"):
             year = date.strftime("%Y")
             return "{0}\n\nO: {1}\nH: {2}\nL: {3}\nC: {4}".format(year, open, high, low, close)
+
+    def on_scroll(self, event):
+
+        if event.button == "up":
+            self.first_candle = max(0, self.first_candle - 5)
+
+        elif event.button == "down":
+            self.first_candle = min(
+                len(self.ohlc) - self.max_candles,
+                self.first_candle + 5
+            )
+
+        self.ax.set_xlim(
+            self.first_candle - 0.5,
+            self.first_candle + self.max_candles - 0.5
+        )
+
+        self.canvas.draw_idle()

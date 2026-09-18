@@ -30,20 +30,16 @@ class Date_range_slider(ctk.CTkFrame):
         right = w - 30
         track_y = 55
 
-        # Background track
         self.canvas.create_line(left, track_y, right, track_y, fill="#5A5A5A", width=6)
 
         sx = self.day_to_x(self.start_day)
         ex = self.day_to_x(self.end_day)
 
-        # Selected range
         self.canvas.create_line(sx,track_y,ex,track_y,fill="#84CC16",width=6)
 
-        # Handles
         self.canvas.create_oval(sx-8, track_y-8,sx+8, track_y+8,fill="#222",outline="#888")
         self.canvas.create_oval(ex-8, track_y-8,ex+8, track_y+8,fill="#222",outline="#888")
 
-        # Date labels
         start = self.min_date + timedelta(days=self.start_day)
         end = self.min_date + timedelta(days=self.end_day)
         self.canvas.create_text(sx,20,text=start.strftime("%d/%m/%y"),fill="white")
