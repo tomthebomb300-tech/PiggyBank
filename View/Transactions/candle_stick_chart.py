@@ -3,20 +3,29 @@ import mplfinance as mpf
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from View.Transactions.selector import Selector
 
 class Candle_stick_chart(ctk.CTkFrame):
     def __init__(self, parent, controller, fg_color, corner_radius):
         super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
         self.controller = controller
 
-        self.timeframe = "W"
+        self.timeframe = "ME"
         self.ohlc = self.controller.getOHLC(self.timeframe)
 
-        self.max_candles = 100
+        self.max_candles = 75
         self.first_candle = max(0, len(self.ohlc)-self.max_candles)
         self.dragging = False
 
-        self.create_chart(self)
+        frame = ctk.CTkFrame(self, fg_color="#1d2228", corner_radius=40)
+        frame.pack(fill = "both", expand = True, padx = 10, pady = (0,10))
+
+        self.create_chart(frame)
+
+        timeframes = ["YE", "ME", "W", "D"]
+        timeframe_selector = Selector(frame, "transparent", timeframes, self.change_timeframe)
+        timeframe_selector.pack(side = "top", anchor = "w", padx = 20, pady = (20,0))
+
         self.update_chart()
 
     def create_chart(self, parent):
@@ -27,9 +36,25 @@ class Candle_stick_chart(ctk.CTkFrame):
         self.ax.set_facecolor("#1d2228")
 
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
-        self.canvas.get_tk_widget().pack(fill = "both", expand = True, pady=(0,40))
+        self.canvas.get_tk_widget().pack(side = "bottom", fill = "both", expand = True, pady=(0,40))
 
         self.canvas.mpl_connect("scroll_event", self.on_scroll)
+
+        colours = mpf.make_marketcolors(
+            up = "#05be24",
+            down = "#BB0A36",
+            wick = {"up":"#c4c4c4","down":"#c4c4c4"}
+        )
+        self.style = mpf.make_mpf_style(
+            marketcolors = colours
+        )
+
+    def change_timeframe(self, timeframe):
+        print(timeframe)
+        self.timeframe = timeframe
+        self.ohlc = self.controller.getOHLC(self.timeframe)
+        self.first_candle = max(0, len(self.ohlc)-self.max_candles)
+        self.update_chart()
 
     def update_chart(self):
         self.ax.clear()
@@ -38,7 +63,7 @@ class Candle_stick_chart(ctk.CTkFrame):
         mpf.plot(
             self.ohlc,
             type="candle",
-            style="charles",
+            style=self.style,
             ax=self.ax
         )
         self.ax.set_xlim(self.first_candle-0.5, self.first_candle+self.max_candles-0.5)
@@ -108,6 +133,8 @@ class Candle_stick_chart(ctk.CTkFrame):
             return "{0}\n\nO: {1}\nH: {2}\nL: {3}\nC: {4}".format(year, open, high, low, close)
 
     def on_scroll(self, event):
+        if(len(self.ohlc) <= self.max_candles):
+            return
 
         if event.button == "up":
             self.first_candle = max(0, self.first_candle - 5)
