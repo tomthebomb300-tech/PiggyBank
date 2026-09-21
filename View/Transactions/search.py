@@ -36,7 +36,7 @@ class Search(ctk.CTkFrame):
         self.content_pages = {
             "Pies": Pies(content_frame, fg_color="transparent", corner_radius=40),
             "Table": Table(content_frame, fg_color="transparent", corner_radius=40),
-            "Chart": Chart(content_frame, fg_color="transparent", corner_radius=40)
+            "Chart": Chart(content_frame, controller, fg_color="transparent", corner_radius=40)
         }
         self.current_content_page = None
 

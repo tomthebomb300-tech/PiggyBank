@@ -24,9 +24,7 @@ class Candle_stick_chart(ctk.CTkFrame):
 
         timeframes = ["YE", "ME", "W", "D"]
         timeframe_selector = Selector(frame, "transparent", timeframes, self.change_timeframe)
-        timeframe_selector.pack(side = "top", anchor = "w", padx = 20, pady = (20,0))
-
-        self.update_chart()
+        timeframe_selector.pack(side = "top", anchor = "w", padx = (90,0), pady = (20,0))
 
     def create_chart(self, parent):
         self.fig = Figure(figsize = (6, 3), dpi = 100, layout="tight")
