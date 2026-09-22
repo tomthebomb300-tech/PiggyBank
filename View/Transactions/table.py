@@ -39,7 +39,7 @@ class Table(ctk.CTkFrame):
         self.tree.column("Shop/Person", width=280, anchor="center")
         self.tree.column("Category", width=100, anchor="center")
 
-    def update_transactions(self, transactions):
+    def update(self, transactions):
         for item in self.tree.get_children():
             self.tree.delete(item)
         for trans in transactions:

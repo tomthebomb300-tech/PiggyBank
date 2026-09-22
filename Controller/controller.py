@@ -113,5 +113,5 @@ class Controller:
     def getLastDate(self):
         return self.finances.getLastDate()
 
-    def getOHLC(self, timeframe):
-        return self.finances.getOHLC(timeframe)
+    def getOHLC(self, categories, timeframe):
+        return self.finances.getOHLC(categories, timeframe)

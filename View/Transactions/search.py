@@ -55,11 +55,8 @@ class Search(ctk.CTkFrame):
         expense = self.controller.getExpense(self.category_selector.get_selected(), self.start_date, self.last_date)
         for key in expense: expense[key] *= -1
         self.content_pages["Pies"].update(income, expense)
-        self.content_pages["Table"].update_transactions(
-            self.controller.getTransactions(self.category_selector.get_selected(), 
-                                            self.start_date, 
-                                            self.last_date)
-                                            )
+        self.content_pages["Table"].update(self.controller.getTransactions(self.category_selector.get_selected(), self.start_date, self.last_date))
+        self.content_pages["Chart"].update(self.controller.getTransactions(self.category_selector.get_selected(), self.start_date, self.last_date))
 
     def display_content_page(self, page_name):
         if self.current_content_page:

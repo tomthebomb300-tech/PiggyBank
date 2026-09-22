@@ -10,19 +10,17 @@ class Candle_stick_chart(ctk.CTkFrame):
         super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
         self.controller = controller
 
-        self.timeframe = "ME"
-        self.ohlc = self.controller.getOHLC(self.timeframe)
-
-        self.max_candles = 75
-        self.first_candle = max(0, len(self.ohlc)-self.max_candles)
-        self.dragging = False
-
         frame = ctk.CTkFrame(self, fg_color="#1d2228", corner_radius=40)
         frame.pack(fill = "both", expand = True, padx = 10, pady = (0,10))
 
         self.create_chart(frame)
 
-        timeframes = ["YE", "ME", "W", "D"]
+        self.max_candles = 75
+        self.ohlc = None
+        self.categories = None
+        self.dragging = False
+
+        timeframes = ["W", "ME", "YE"]
         timeframe_selector = Selector(frame, "transparent", timeframes, self.change_timeframe)
         timeframe_selector.pack(side = "top", anchor = "w", padx = (90,0), pady = (20,0))
 
@@ -48,9 +46,13 @@ class Candle_stick_chart(ctk.CTkFrame):
         )
 
     def change_timeframe(self, timeframe):
-        print(timeframe)
         self.timeframe = timeframe
-        self.ohlc = self.controller.getOHLC(self.timeframe)
+        if(self.categories):
+            self.update(self.categories)
+
+    def update(self, categories):
+        self.categories = categories
+        self.ohlc = self.controller.getOHLC(self.categories, self.timeframe)
         self.first_candle = max(0, len(self.ohlc)-self.max_candles)
         self.update_chart()
 
@@ -65,6 +67,8 @@ class Candle_stick_chart(ctk.CTkFrame):
             ax=self.ax
         )
         self.ax.set_xlim(self.first_candle-0.5, self.first_candle+self.max_candles-0.5)
+        self.ax.relim()
+        self.ax.autoscale_view()
         self.canvas.draw_idle()
 
     def add_tooltip(self):
@@ -115,11 +119,7 @@ class Candle_stick_chart(ctk.CTkFrame):
         low = f"{ohlc.low:,}"
         close = f"{ohlc.close:,}"
         
-        if(self.timeframe == "D"):
-            formatted_date = date.strftime('%d / %b / %Y')
-            day = date.strftime("%A")
-            return "{0}\n{1}\n\nO: {2}\nH: {3}\nL: {4}\nC: {5}".format(formatted_date, day, open, high, low, close)
-        elif(self.timeframe == "W"):
+        if(self.timeframe == "W"):
             month_year = date.strftime("%b / %Y")
             week = date.strftime("%W")
             return "{0}\nWeek: {1}\n\nO: {2}\nH: {3}\nL: {4}\nC: {5}".format(month_year, week, open, high, low, close)

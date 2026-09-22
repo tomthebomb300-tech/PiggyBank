@@ -12,8 +12,6 @@ class Finances:
         self.cashBalance = cashBalance*100
         self.df = df
         self.df["Amount"] *= 100
-        self.df["Balance"] = self.df["Amount"].cumsum()
-        self.df["Balance"] = self.df["Balance"]+self.accountBalance+self.cashBalance
 
     def getAccountBalanceToDate(self):
         accountTrans = self.df[(self.df["Payment Method"] == "Card") | (self.df["Payment Method"] == "Bank Transfer") | (self.df["Payment Method"] == "Cheque")]
@@ -142,8 +140,11 @@ class Finances:
     def getLastDate(self):
         return self.df["Date"].iloc[len(self.df)-1]
 
-    def getOHLC(self, timeframe):
-        mod_df = self.df.set_index("Date")
+    def getOHLC(self, categories, timeframe):
+        filtered_df = self.df[self.df["Category"].isin(categories)]
+        filtered_df["Balance"] = filtered_df["Amount"].cumsum()
+        filtered_df["Balance"] = filtered_df["Balance"]+self.accountBalance+self.cashBalance
+        mod_df = filtered_df.set_index("Date")
         mod_df["Balance"] /= 100
         ohlc = mod_df["Balance"].resample(timeframe).ohlc()
         return ohlc
