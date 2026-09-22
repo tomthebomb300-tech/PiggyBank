@@ -58,6 +58,9 @@ class Candle_stick_chart(ctk.CTkFrame):
 
     def update_chart(self):
         self.ax.clear()
+        if(len(self.ohlc) == 0):
+            return
+
         self.add_tooltip()
 
         mpf.plot(
@@ -131,6 +134,15 @@ class Candle_stick_chart(ctk.CTkFrame):
             return "{0}\n\nO: {1}\nH: {2}\nL: {3}\nC: {4}".format(year, open, high, low, close)
 
     def on_scroll(self, event):
+        if(event.key == "control"):
+            if(event.button == "up"):
+                self.max_candles -= 1
+            if(event.button == "down"):
+                self.max_candles +=1
+            self.ax.set_xlim(self.first_candle - 0.5,self.first_candle + self.max_candles - 0.5)
+            self.canvas.draw_idle()
+            return
+        
         if(len(self.ohlc) <= self.max_candles):
             return
 
