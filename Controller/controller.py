@@ -115,3 +115,7 @@ class Controller:
 
     def getOHLC(self, categories, timeframe):
         return self.finances.getOHLC(categories, timeframe)
+
+    def getWeeksAndBalances(self, categories):
+        ohlc = self.finances.getOHLC(categories, "W")
+        return ohlc.index.tolist(), ohlc["close"].tolist()

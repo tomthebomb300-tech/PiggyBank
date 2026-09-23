@@ -2,13 +2,15 @@ import customtkinter as ctk
 
 from View.Transactions.selector import Selector
 from View.Transactions.candle_stick_chart import Candle_stick_chart
+from View.Transactions.line_chart import Line_chart
 
 class Chart(ctk.CTkFrame):
     def __init__(self, parent, controller, fg_color, corner_radius):
         super().__init__(parent, fg_color=fg_color, corner_radius=corner_radius)
 
         self.charts = {
-            "Candle_stick" : Candle_stick_chart(self, controller, fg_color = fg_color, corner_radius = corner_radius)
+            "Candle_stick" : Candle_stick_chart(self, controller, fg_color = fg_color, corner_radius = corner_radius),
+            "Line" : Line_chart(self, controller, fg_color = fg_color, corner_radius = corner_radius)
         }
 
         self.current_chart = None

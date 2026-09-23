@@ -148,7 +148,7 @@ class Finances:
         mod_df["Balance"] /= 100
         ohlc = mod_df["Balance"].resample(timeframe).ohlc()
         return ohlc
-        
+     
 
 
 
