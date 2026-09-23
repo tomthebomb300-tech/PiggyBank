@@ -148,6 +148,15 @@ class Finances:
         mod_df["Balance"] /= 100
         ohlc = mod_df["Balance"].resample(timeframe).ohlc()
         return ohlc
+
+    def getOHLC_investments(self, timeframe):
+        investments_df = self.df[self.df["Category"] == "Investing"]
+        investments_df["Amount"] *= -1
+        investments_df["Balance"] = investments_df["Amount"].cumsum()
+        investments_df = investments_df.set_index("Date")
+        investments_df["Balance"] /= 100
+        ohlc = investments_df["Balance"].resample(timeframe).ohlc()
+        return ohlc
      
 
 

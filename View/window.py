@@ -2,6 +2,7 @@ import customtkinter as ctk
 
 from View.Overview.overview import Overview
 from View.Transactions.transactions import Transactions
+from View.Investments.investments import Investments
 from View.sidebar import Sidebar
 
 
@@ -25,11 +26,12 @@ class Window(ctk.CTk):
 
         self.pages = {
             "overview": Overview(self.content, self.controller, fg_color ="#30353b", corner_radius = 40),
-            "transactions": Transactions(self.content, self.controller, fg_color = "#30353b", corner_radius=40)
+            "transactions": Transactions(self.content, self.controller, fg_color = "#30353b", corner_radius=40),
+            "investments": Investments(self.content, self.controller, fg_color = "#30353b", corner_radius=40)
         }
 
         self.current_page = None
-        self.display_page("transactions")
+        self.display_page("overview")
 
     def run(self):
         self.mainloop()

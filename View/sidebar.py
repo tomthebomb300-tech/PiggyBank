@@ -39,23 +39,20 @@ class Sidebar(ctk.CTkFrame):
         name = "Overview"
         self.__clicked(name)
         self.controller.display_overview()
-        print(name)
 
     def display_transactions(self):
         name = "Transactions"
         self.__clicked(name)
         self.controller.display_transactions()
-        print(name)
 
     def dislpay_investments(self):
         name = "Investments"
         self.__clicked(name)
-        print(name)
+        self.controller.display_investments()
 
     def display_settings(self):
         name = "Settings"
         self.__clicked(name)
-        print(name)
 
 
 

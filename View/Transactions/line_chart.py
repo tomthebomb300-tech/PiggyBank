@@ -106,6 +106,3 @@ class Line_chart(ctk.CTkFrame):
         self.vline.set_visible(False)
         self.tooltip.set_visible(False)
         self.canvas.draw_idle()
-
-    def get_text(self):
-        return "blank"

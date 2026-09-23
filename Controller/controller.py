@@ -15,6 +15,9 @@ class Controller:
     def display_transactions(self):
         self.window.display_page("transactions")
 
+    def display_investments(self):
+        self.window.display_page("investments")
+
     def getBankBalance(self):
         return self.finances.getAccountBalanceToDate()
 
@@ -119,3 +122,7 @@ class Controller:
     def getWeeksAndBalances(self, categories):
         ohlc = self.finances.getOHLC(categories, "W")
         return ohlc.index.tolist(), ohlc["close"].tolist()
+
+    def getWeeksAndInvested(self):
+        ohlc = self.finances.getOHLC_investments("W")
+        return ohlc.index.tolist(), ohlc["close"].ffill().tolist()
