@@ -13,9 +13,8 @@ class Investments(ctk.CTkFrame):
         frame = ctk.CTkFrame(self, fg_color="#1d2228", corner_radius=40)
         frame.pack(fill = "both", expand = True, padx = 10, pady = (10,10))
         self.create_chart(frame)
-        weeks, cum_deposits = self.controller.getWeeksAndInvested()
-        print(cum_deposits)
-        self.update_chart(weeks, cum_deposits)
+        dates, deposits, portfolio_value = self.controller.getDatesDepositsPortValue()
+        self.update_chart(dates, deposits, portfolio_value)
 
     def create_chart(self, parent):
         self.fig = Figure(figsize = (6, 3), dpi = 100, layout="tight")
@@ -27,13 +26,14 @@ class Investments(ctk.CTkFrame):
         self.canvas = FigureCanvasTkAgg(self.fig, parent)
         self.canvas.get_tk_widget().pack(side = "bottom", fill = "both", expand = True, pady=(40,40))   
 
-    def update_chart(self, weeks, cum_deposits):
+    def update_chart(self, dates, deposits, portfolio_value):
         self.ax.clear()
         self.ax.set_facecolor("#1d2228")
 
-        self.ax.plot(weeks, cum_deposits,"#349404",linewidth=2,label="Deposited",)
+        self.ax.plot(dates, deposits,"#ffffff",linewidth=2,label="Deposited Value",)
+        self.ax.plot(dates, portfolio_value,"#349404",linewidth=2,label="Portfolio Value",)
 
-        self.ax.set_xlim(min(weeks), max(weeks))
+        self.ax.set_xlim(min(dates), max(dates))
 
         self.ax.tick_params(axis = "x", colors = "white")
         self.ax.tick_params(axis = "y", colors = "white")

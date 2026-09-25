@@ -86,6 +86,9 @@ class Controller:
     def getPortfolioValue(self):
         return round(self.trading212.getUPL() + self.getInvestmentDeposits(),2)
 
+    def getDatesDepositsPortValue(self):
+        return self.trading212.getDatesDepositsPortValue()
+
 
     def getCategories(self):
         return self.finances.getCategories()
