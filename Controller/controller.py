@@ -89,6 +89,9 @@ class Controller:
     def getDatesDepositsPortValue(self):
         return self.trading212.getDatesDepositsPortValue()
 
+    def getFilledOrderDetailsDict(self):
+        return self.trading212.getFilledOrderDetailsDict()
+
 
     def getCategories(self):
         return self.finances.getCategories()

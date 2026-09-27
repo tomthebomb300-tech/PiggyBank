@@ -14,6 +14,8 @@ class Trading212:
         url = "https://live.trading212.com/api/v0/equity/portfolio"
         self.portfolio_response = requests.get(url,auth=HTTPBasicAuth(self.API_KEY, self.API_SECRET))
 
+        self.filled_order_df = None
+        self.createFilledOrderDF()
 
     def getUPL(self):
         if(self.portfolio_response.status_code == 200):
@@ -21,7 +23,8 @@ class Trading212:
             return data["ppl"]
         return 0
 
-    def getDatesDepositsPortValue(self):
+
+    def createFilledOrderDF(self):
         BASE_URL = "https://live.trading212.com"
         next_path = "/api/v0/equity/history/orders?limit=50"
         items = []
@@ -45,13 +48,19 @@ class Trading212:
                 orders.append(order)
 
         fill_df = pd.DataFrame(fills).sort_values(by="filledAt")
-        fill_df = fill_df[["quantity", "price"]]
         order_df = pd.DataFrame(orders).sort_values(by="createdAt")
-        order_df = order_df[["value", "createdAt"]]
+
+        fill_df.drop("id", axis="columns", inplace=True)
+        fill_df.drop("type", axis="columns", inplace=True)
 
         order_df["cumValue"] = order_df["value"].cumsum()
-        df = pd.concat([order_df, fill_df], axis=1)
-        df["cumQuantity"] = df["quantity"].cumsum()
-        df["price"] *= 1.16
-        df["portfolioValue"] = df["cumQuantity"] * df["price"]
-        return df["createdAt"].tolist(), df["cumValue"].tolist(), df["portfolioValue"].tolist()
+        self.filled_order_df = pd.concat([order_df, fill_df], axis=1)
+        self.filled_order_df["cumQuantity"] = self.filled_order_df["quantity"].cumsum()
+        self.filled_order_df["portfolioValue"] = self.filled_order_df["cumQuantity"] * (self.filled_order_df["price"] * 1.16)
+
+
+    def getDatesDepositsPortValue(self):
+        return self.filled_order_df["filledAt"].tolist(), self.filled_order_df["cumValue"].tolist(), self.filled_order_df["portfolioValue"].tolist()
+
+    def getFilledOrderDetailsDict(self):
+        return self.filled_order_df[["type", "filledValue", "initiatedFrom", "instrument", "quantity", "price", "filledAt", "side"]].to_dict("index")

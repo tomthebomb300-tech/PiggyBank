@@ -1,6 +1,6 @@
 import customtkinter as ctk
 
-from View.Transactions.search import Search
+from View.Investments.order_stack import Order_stack
 
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -15,9 +15,20 @@ class Investments(ctk.CTkFrame):
         frame = ctk.CTkFrame(self, fg_color="transparent", corner_radius=40)
         frame.pack(fill = "both", expand = True, padx = 20, pady = 20)
 
-        self.create_chart(frame)
-        self.create_overview(frame, deposits, portfolio_value)
+        left = ctk.CTkFrame(frame, fg_color="transparent", corner_radius=40)
+        left.pack(fill = "both", expand = True, side = "left")
+
+        right = ctk.CTkFrame(frame, fg_color="transparent", corner_radius=40)
+        right.pack(fill = "y", expand = True, side = "right")
+
+        self.create_chart(left)
+        self.create_overview(left, deposits, portfolio_value)
         self.update_chart(dates, deposits, portfolio_value)
+
+        orders = self.controller.getFilledOrderDetailsDict()
+        
+        order_stack = Order_stack(right, "transparent", list(orders.values()))
+        order_stack.pack(side = "right", fill = "y")
 
 
     def create_overview(self, parent, deposits, portfolio_value):
