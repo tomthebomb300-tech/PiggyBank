@@ -4,6 +4,7 @@ from View.Overview.overview import Overview
 from View.Transactions.transactions import Transactions
 from View.Investments.investments import Investments
 from View.sidebar import Sidebar
+from View.authentication import Authentication
 
 
 class Window(ctk.CTk):
@@ -16,7 +17,12 @@ class Window(ctk.CTk):
 
         self.window_frame = ctk.CTkFrame(self, fg_color = "#191c1f", corner_radius=0)
         self.window_frame.pack(fill = "both", expand = True)
+    
+    def display_authentication(self):
+        login = Authentication(self.window_frame, self.controller, fg_color = "#30353b", corner_radius = 0)
+        login.pack(fill = "both", expand = True)
 
+    def logged_in(self):
         sidebar = Sidebar(self.window_frame, self.controller, fg_color = "#191c1f")
         sidebar.pack(side = "left", anchor = "n", pady = (70,0), padx = (0,10))
 

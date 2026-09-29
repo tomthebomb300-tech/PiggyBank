@@ -7,6 +7,9 @@ class Controller:
         self.finances = getFinances()
         self.trading212 = Trading212()
         self.window = Window("Finances", 1080, 1920, self)
+
+        self.display_authentication()
+        
         self.window.run()
 
     def display_overview(self):
@@ -17,6 +20,9 @@ class Controller:
 
     def display_investments(self):
         self.window.display_page("investments")
+
+    def display_authentication(self):
+        self.window.display_authentication()
 
     def getBankBalance(self):
         return self.finances.getAccountBalanceToDate()

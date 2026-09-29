@@ -19,7 +19,7 @@ class Investments(ctk.CTkFrame):
         left.pack(fill = "both", expand = True, side = "left")
 
         right = ctk.CTkFrame(frame, fg_color="transparent", corner_radius=40)
-        right.pack(fill = "y", expand = True, side = "right")
+        right.pack(fill = "y", side = "right")
 
         self.create_chart(left)
         self.create_overview(left, deposits, portfolio_value)
