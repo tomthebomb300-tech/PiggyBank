@@ -1,16 +1,28 @@
 from Model.dataManager import getFinances
 from Model.trading212 import Trading212
+from Model.firebase import Firebase
 from View.window import Window
 
 class Controller:
     def __init__(self):
         self.finances = getFinances()
         self.trading212 = Trading212()
+        self.firebase = Firebase()
         self.window = Window("Finances", 1080, 1920, self)
 
         self.display_authentication()
         
         self.window.run()
+
+    def login_user(self, email, password):
+        success = self.firebase.login_user(email, password)
+        if(success):
+            self.window.logged_in()
+
+    def signup_user(self, email, password):
+        success = self.firebase.signup_user(email, password)
+        if(success):
+            self.window.logged_in()
 
     def display_overview(self):
         self.window.display_page("overview")

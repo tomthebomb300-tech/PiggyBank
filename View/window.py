@@ -19,12 +19,13 @@ class Window(ctk.CTk):
         self.window_frame.pack(fill = "both", expand = True)
     
     def display_authentication(self):
-        login = Authentication(self.window_frame, self.controller, fg_color = "#30353b", corner_radius = 0)
-        login.pack(fill = "both", expand = True)
+        self.login = Authentication(self.window_frame, self.controller, fg_color = "#30353b", corner_radius = 0)
+        self.login.pack(fill = "both", expand = True)
 
     def logged_in(self):
-        sidebar = Sidebar(self.window_frame, self.controller, fg_color = "#191c1f")
-        sidebar.pack(side = "left", anchor = "n", pady = (70,0), padx = (0,10))
+        self.login.pack_forget()
+        self.sidebar = Sidebar(self.window_frame, self.controller, fg_color = "#191c1f")
+        self.sidebar.pack(side = "left", anchor = "n", pady = (70,0), padx = (0,10))
 
         self.content = ctk.CTkFrame(self.window_frame, fg_color="#191c1f")
         self.content.pack(fill = "both", expand = True)
