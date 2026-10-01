@@ -30,7 +30,7 @@ class Authentication(ctk.CTkFrame):
         img = Image.open("Images/Light/password.png")
         password_image = ctk.CTkLabel(password_frame, text = "", image = ctk.CTkImage(light_image=img, dark_image=img, size=(20,20)))
         password_image.pack(side = "left")
-        self.password_entry = ctk.CTkEntry(password_frame,width=300,placeholder_text="Password", fg_color = "transparent", border_width=0)
+        self.password_entry = ctk.CTkEntry(password_frame,width=300,placeholder_text="Password", show = "*", fg_color = "transparent", border_width=0)
         self.password_entry.pack(side = "left")
 
         self.submit_button = ctk.CTkButton(content, text="Login", fg_color="#ffffff", text_color="#000000", command=self.submit)
@@ -50,7 +50,7 @@ class Authentication(ctk.CTkFrame):
         self.swap_mode_button.pack(side = "right")
 
     def google_login(self):
-        print("google")
+        self.controller.google_login()
 
     def swap_submit_mode(self):
         if(self.logging_in):

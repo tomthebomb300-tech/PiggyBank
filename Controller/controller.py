@@ -14,6 +14,11 @@ class Controller:
         
         self.window.run()
 
+    def google_login(self):
+        success = self.firebase.google_login()
+        if(success):
+            self.window.logged_in()
+
     def login_user(self, email, password):
         success = self.firebase.login_user(email, password)
         if(success):
