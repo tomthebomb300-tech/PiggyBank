@@ -8,17 +8,16 @@ import pandas as pd
 
 class Finances:
     def __init__(self, accountBalance, cashBalance, df):
-        self.accountBalance = accountBalance*100
-        self.cashBalance = cashBalance*100
+        self.accountBalance = accountBalance
+        self.cashBalance = cashBalance
         self.df = df
-        self.df["Amount"] *= 100
 
     def getAccountBalanceToDate(self):
-        accountTrans = self.df[(self.df["Payment Method"] == "Card") | (self.df["Payment Method"] == "Bank Transfer") | (self.df["Payment Method"] == "Cheque")]
+        accountTrans = self.df[(self.df["PaymentMethod"] == "Card") | (self.df["PaymentMethod"] == "Bank Transfer") | (self.df["PaymentMethod"] == "Cheque")]
         return (self.accountBalance + accountTrans["Amount"].sum())/100
 
     def getCashBalanceToDate(self):
-        cashTrans = self.df[self.df["Payment Method"] == "Cash"]
+        cashTrans = self.df[self.df["PaymentMethod"] == "Cash"]
         return (self.cashBalance + cashTrans["Amount"].sum())/100
 
     def getInvestmentDeposits(self):
@@ -69,9 +68,9 @@ class Finances:
         #Account account balance at start of year
         prev_years_df = self.df[self.df["Date"].dt.year < year]
         account_balance = prev_years_df[
-            (prev_years_df["Payment Method"] == "Card") |
-            (prev_years_df["Payment Method"] == "Bank Transfer") |
-            (prev_years_df["Payment Method"] == "Cheque")
+            (prev_years_df["PaymentMethod"] == "Card") |
+            (prev_years_df["PaymentMethod"] == "Bank Transfer") |
+            (prev_years_df["PaymentMethod"] == "Cheque")
         ]["Amount"].sum() + self.accountBalance
 
         year_df = self.df[self.df["Date"].dt.year == year]
@@ -81,9 +80,9 @@ class Finances:
         for num in month_nums:
             month_df = year_df[year_df["Date"].dt.month == num]
             month_balance = month_df[
-                (month_df["Payment Method"] == "Card") | 
-                (month_df["Payment Method"] == "Bank Transfer") | 
-                (month_df["Payment Method"] == "Cheque")]["Amount"].sum()
+                (month_df["PaymentMethod"] == "Card") | 
+                (month_df["PaymentMethod"] == "Bank Transfer") | 
+                (month_df["PaymentMethod"] == "Cheque")]["Amount"].sum()
             account_balance += month_balance
             monthly_account_balance.append(round(account_balance/100, 2))
         return monthly_account_balance
@@ -91,7 +90,7 @@ class Finances:
     def getMonthlyCashBalance(self, year):
         #Account cash balance at start of year
         prev_years_df = self.df[self.df["Date"].dt.year < year]
-        cash_balance = prev_years_df[prev_years_df["Payment Method"] == "Cash"]["Amount"].sum() + self.cashBalance
+        cash_balance = prev_years_df[prev_years_df["PaymentMethod"] == "Cash"]["Amount"].sum() + self.cashBalance
 
         year_df = self.df[self.df["Date"].dt.year == year]
         month_nums = year_df["Date"].dt.month.unique()
@@ -99,7 +98,7 @@ class Finances:
         monthly_cash_balance = []
         for num in month_nums:
             month_df = year_df[year_df["Date"].dt.month == num]
-            month_balance = month_df[month_df["Payment Method"] == "Cash"]["Amount"].sum()
+            month_balance = month_df[month_df["PaymentMethod"] == "Cash"]["Amount"].sum()
             cash_balance += month_balance
             monthly_cash_balance.append(round(cash_balance/100, 2))
         return monthly_cash_balance
@@ -130,7 +129,7 @@ class Finances:
         return self.df[(self.df["Category"] == category) & (self.df["Amount"] < 0) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)]["Amount"].sum()/100
 
     def getEntries(self, categories, start_date, last_date):
-        filtered_df = self.df[(self.df["Category"].isin(categories)) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)][["Date", "Amount", "Payment Method", "Shop/Person", "Description", "Category"]]
+        filtered_df = self.df[(self.df["Category"].isin(categories)) & (self.df["Date"] >= start_date) & (self.df["Date"] <= last_date)][["Date", "Amount", "PaymentMethod", "ShopPerson", "Description", "Category"]]
         filtered_df["Amount"] /= 100
         return filtered_df.to_dict(orient="records")
 
@@ -168,7 +167,7 @@ def getGoogleSheet():
     return BytesIO(r.content)
 
 def getCSV():
-    return "D:\Coding\Python\PiggyBank\Data\data.csv"
+    return "./Model/Data.csv"
 
 def getDataframe():
     df = pd.read_csv(getCSV())
@@ -176,8 +175,9 @@ def getDataframe():
     # df.to_csv("Data.csv")
     df = df[["Date", "Amount", "Payment Method", "Shop/Person", "Location", "Description", "Category"]]
     df["Date"] = pd.to_datetime(df["Date"], format="%d-%b-%Y")
-    df = df.sort_values("Date")
+    df = df.sort_values("Date")   
+    df["Amount"] *= 100 
     return df
 
 def getFinances():
-    return Finances(4423.71, 120.00, getDataframe())
+    return Finances(4423.71*100, 120.00*100, getDataframe())

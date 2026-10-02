@@ -71,4 +71,4 @@ class Firebase:
         result = response.json()
         print("Logged In: ", result.get("email"))
         print("UID: ", result.get("localId"))
-        return True
+        return result.get("localId"), True

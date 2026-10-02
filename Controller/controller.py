@@ -1,32 +1,36 @@
-from Model.dataManager import getFinances
+from Model.database import Sqlite_DB
 from Model.trading212 import Trading212
 from Model.firebase import Firebase
 from View.window import Window
 
 class Controller:
     def __init__(self):
-        self.finances = getFinances()
+        self.UID = None
+        self.window = Window("Finances", 1080, 1920, self)
+        self.display_authentication()
+        self.db = Sqlite_DB()
         self.trading212 = Trading212()
         self.firebase = Firebase()
-        self.window = Window("Finances", 1080, 1920, self)
-
-        self.display_authentication()
         
         self.window.run()
 
     def google_login(self):
-        success = self.firebase.google_login()
+        self.UID, success = self.firebase.google_login()
+        print("self.UID google: ", self.UID)
         if(success):
+            self.finances = self.db.get_finances(self.UID)
             self.window.logged_in()
 
     def login_user(self, email, password):
-        success = self.firebase.login_user(email, password)
+        self.UID, success = self.firebase.login_user(email, password)
         if(success):
+            self.finances = self.db.get_finances(self.UID)
             self.window.logged_in()
 
     def signup_user(self, email, password):
-        success = self.firebase.signup_user(email, password)
+        self.UID, success = self.firebase.signup_user(email, password)
         if(success):
+            self.finances = self.db.get_finances(self.UID)
             self.window.logged_in()
 
     def display_overview(self):
@@ -68,9 +72,9 @@ class Controller:
         if(c == "Entertainment"):
             return image.format("Entertainment")
         if(c=="Food" or c=="Impulsive Food" or c=="Food Non-Personal"):
-            if(transaction["Shop/Person"] == "Lidl"):
+            if(transaction["ShopPerson"] == "Lidl"):
                 return image.format("Lidl")
-            if(transaction["Shop/Person"] == "Tesco"):
+            if(transaction["ShopPerson"] == "Tesco"):
                 return image.format("Tesco")
             return image.format("Food")
         if(c == "Household"):

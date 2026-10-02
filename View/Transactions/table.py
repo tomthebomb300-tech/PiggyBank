@@ -46,7 +46,7 @@ class Table(ctk.CTkFrame):
             self.tree.insert("", "end", values=(
                 trans["Date"].date(),
                 trans["Amount"],
-                trans["Payment Method"],
-                trans["Shop/Person"],
+                trans["PaymentMethod"],
+                trans["ShopPerson"],
                 trans["Category"]
             ))

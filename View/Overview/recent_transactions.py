@@ -44,7 +44,7 @@ class Recent_transactions(ctk.CTkFrame):
             middle_frame = ctk.CTkFrame(transaction_card, fg_color = "#1d2228")
             middle_frame.pack(side="left")
 
-            label = ctk.CTkLabel(middle_frame, text = trans["Shop/Person"], font = ("Arial", 16), text_color = "white")
+            label = ctk.CTkLabel(middle_frame, text = trans["ShopPerson"], font = ("Arial", 16), text_color = "white")
             label.pack(anchor = "w")
             label = ctk.CTkLabel(middle_frame, text = trans["Date"].date(), font = ("Arial", 12), text_color = "#49515c")
             label.pack(anchor = "w")
