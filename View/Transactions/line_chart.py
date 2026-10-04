@@ -33,6 +33,8 @@ class Line_chart(ctk.CTkFrame):
 
 
     def update_chart(self, filtered, un_filtered, weeks):
+        if(len(weeks) == 0):
+            return
         self.ax.clear()
         self.add_tooltip()
         self.ax.set_facecolor("#1d2228")

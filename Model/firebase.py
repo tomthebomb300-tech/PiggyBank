@@ -25,20 +25,20 @@ class Firebase:
             login = self.auth.sign_in_with_email_and_password(email, password)
             print("Email: ", email)
             print("UID: ", login["localId"])
-            return True
+            return login["localId"], True
         except:
             print("Invalid Email or Password")
-            return False
+            return "", False
 
     def signup_user(self, email, password):
         try:
             user = self.auth.create_user_with_email_and_password(email, password)
             print("Email: ", email)
             print("UID: ",user["localId"])
-            return True
+            return user["localId"], True
         except:
             print("Email already exists")
-            return False
+            return "", False
 
     def google_login(self):
         SCOPES = [

@@ -22,11 +22,13 @@ class Sidebar(ctk.CTkFrame):
         self.buttons[name] = self.__create_button("Images/Light/investments.png", name, self.dislpay_investments)
         name = "Settings"
         self.buttons[name] = self.__create_button("Images/Light/settings.png", name, self.display_settings)
+        name = "Log Out"
+        self.buttons[name] = self.__create_button("Images/Light/log_out.png", name, self.log_out)
 
     def __create_button(self, img_path, name, command):
         img = Image.open(img_path)
         button = Navigation_button(self, name, ctk.CTkImage(light_image=img, dark_image=img, size = (16,16)), command)
-        button.pack(anchor = "w", fill = "x", pady = (0, 20))
+        button.pack(fill = "x", pady = (0, 20))
         return button
 
     def __clicked(self, button_name):
@@ -53,6 +55,13 @@ class Sidebar(ctk.CTkFrame):
     def display_settings(self):
         name = "Settings"
         self.__clicked(name)
+
+    def log_out(self):
+        name = "Log Out"
+        self.__clicked(name)
+        print("logging out")
+        self.controller.log_out()
+
 
 
 

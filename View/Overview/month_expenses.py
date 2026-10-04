@@ -81,6 +81,8 @@ class Month_expenses(ctk.CTkFrame):
 
 
     def update_chart(self):
+        if(len(self.expenses) == 0):
+            return
         #convert negative to positive
         for c in self.expenses:
             self.expenses[c] *= -1

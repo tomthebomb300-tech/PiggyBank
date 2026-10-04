@@ -14,9 +14,12 @@ class Controller:
         
         self.window.run()
 
+    def log_out(self):
+        self.UID = None
+        self.display_authentication()
+
     def google_login(self):
         self.UID, success = self.firebase.google_login()
-        print("self.UID google: ", self.UID)
         if(success):
             self.finances = self.db.get_finances(self.UID)
             self.window.logged_in()
@@ -30,6 +33,7 @@ class Controller:
     def signup_user(self, email, password):
         self.UID, success = self.firebase.signup_user(email, password)
         if(success):
+            self.db.add_user(self.UID, 0, 0)
             self.finances = self.db.get_finances(self.UID)
             self.window.logged_in()
 

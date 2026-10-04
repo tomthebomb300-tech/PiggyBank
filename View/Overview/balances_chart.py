@@ -72,6 +72,9 @@ class Balances_chart(ctk.CTkFrame):
 
 
     def update_chart(self):
+        if(len(self.months) == 0):
+            return
+        
         self.x = np.arange(len(self.months))
         x_smooth = np.linspace(self.x.min(), self.x.max(), 300)
 

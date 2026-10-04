@@ -17,9 +17,10 @@ class Date_range_slider(ctk.CTkFrame):
         self.canvas = ctk.CTkCanvas(self,height=90,bg="#1d2228",highlightthickness=0)
         self.canvas.pack(fill="x", expand=True)
 
-        self.canvas.bind("<Configure>", self.redraw)    
-        self.canvas.bind("<Button-1>", self.click)      
-        self.canvas.bind("<B1-Motion>", self.drag)       
+        if(self.total_days > 0):
+            self.canvas.bind("<Configure>", self.redraw)    
+            self.canvas.bind("<Button-1>", self.click)      
+            self.canvas.bind("<B1-Motion>", self.drag)       
 
         self.active_handle = None
 

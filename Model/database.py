@@ -16,8 +16,8 @@ class Sqlite_DB:
         self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS users (
                 UID TEXT PRIMARY KEY,
-                StartAccountBalance REAL NOT NULL,
-                StartCashBalance REAL NOT NULL
+                StartAccountBalance REAL,
+                StartCashBalance REAL
             );
         """)
         self.cursor.execute("""
@@ -92,3 +92,4 @@ class Sqlite_DB:
             INSERT INTO users (UID, StartAccountBalance, StartCashBalance)
             VALUES (?, ?, ?)
         """, (UID, bank_balance, cash_balance))
+        self.conn.commit()

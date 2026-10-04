@@ -134,10 +134,17 @@ class Finances:
         return filtered_df.to_dict(orient="records")
 
     def getStartDate(self):
-        return self.df["Date"].iloc[0]
+        if(len(self.df) > 0):
+            return self.df["Date"].iloc[0]
+        else:
+            return datetime.now()
 
     def getLastDate(self):
-        return self.df["Date"].iloc[len(self.df)-1]
+        if(len(self.df) > 0):
+            return self.df["Date"].iloc[len(self.df)-1]
+        else:
+            return datetime.now()
+
 
     def getOHLC(self, categories, timeframe):
         filtered_df = self.df[self.df["Category"].isin(categories)]
