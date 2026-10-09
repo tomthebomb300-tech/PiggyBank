@@ -7,10 +7,14 @@ class Controller:
     def __init__(self):
         self.UID = None
         self.window = Window("Finances", 1080, 1920, self)
-        self.display_authentication()
         self.db = Sqlite_DB()
         self.trading212 = Trading212()
         self.firebase = Firebase()
+        # self.display_authentication()
+        self.UID = "H3jkSjeoevbvYEHaS0n4XbhocqI2"
+        self.finances = self.db.get_finances(self.UID)
+        self.window.logged_in()
+
         
         self.window.run()
 

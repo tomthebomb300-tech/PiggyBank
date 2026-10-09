@@ -28,7 +28,7 @@ class Investments(ctk.CTkFrame):
         orders = self.controller.getFilledOrderDetailsDict()
         
         order_stack = Order_stack(right, "transparent", list(orders.values()))
-        order_stack.pack(side = "right", fill = "y")
+        order_stack.pack(side = "right", fill = "y", padx = 20, pady = 20)
 
 
     def create_overview(self, parent, deposits, portfolio_value):
